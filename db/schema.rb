@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_04_07_115316) do
 
-  create_table "fgroups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "fgroups", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_115316) do
     t.index ["model_id"], name: "index_fgroups_on_model_id"
   end
 
-  create_table "forders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "forders", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "meal", limit: 50, null: false
     t.string "resturant", limit: 50, null: false
     t.string "image", limit: 50
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_115316) do
     t.index ["model_id"], name: "index_forders_on_model_id"
   end
 
-  create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_115316) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "orderuser", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "orderuser", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "model_id", null: false
