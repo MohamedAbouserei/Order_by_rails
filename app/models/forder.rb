@@ -1,6 +1,6 @@
 class Forder < ApplicationRecord
-    validates :meal, :presence => true,:length => { :maximum => 50 }
-    validates :meal, :resturant => true,:length => { :maximum => 50 }
-    validates :meal, :image => true,:length => { :maximum => 50 }
-    belongs_to :model
+    validates :meal, :presence => true, :length => { :maximum => 50, :minimum => 3 }
+    validates :resturant, :presence => true, :length => { :maximum => 50 , :minimum => 3}
+    validates :image, :presence => true, :length => { :maximum => 50 }
+    belongs_to :model, class_name: "model", foreign_key: "model_id"
 end
