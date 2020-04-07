@@ -10,7 +10,23 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery.min.js
+//= require jquery-migrate-3.0.1.min.js
+//= require popper.min.js
+//= require bootstrap.min.js
+//= require jquery.easing.1.3.js
+//= require jquery.waypoints.min.js
+//= require jquery.stellar.min.js
+//= require owl.carousel.min.js
+//= require jquery.magnific-popup.min.js
+//= require aos.js
+//= require jquery.animateNumber.min.js
+//= require bootstrap-datepicker.js
+//= require jquery.timepicker.min.js
+//= require scrollax.min.js
+//= require google-map.js
+//= require main.js
+//= require_tree .
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require_tree .

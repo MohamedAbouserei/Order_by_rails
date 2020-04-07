@@ -5,8 +5,8 @@ class GroupUser < ActiveRecord::Migration[5.2]
       end
     add_reference :groupuser, :model, index: true,:null =>false
     add_foreign_key :groupuser, :models
-    add_reference :groupuser, :group, index: true,:null =>false
-    add_foreign_key :groupuser, :groups
+    add_reference :groupuser, :fgroup, index: true,:null =>false
+    add_foreign_key :groupuser, :fgroups
     
     
   end
