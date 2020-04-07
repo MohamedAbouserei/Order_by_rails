@@ -53,6 +53,12 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+
+  gem 'guard', '~> 2.16', '>= 2.16.2'
+  #Guard::LiveReload automatically reloads your browser when 'view' files are modified.
+  gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
+  #make erroes better
+  gem 'better_errors', '~> 2.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
