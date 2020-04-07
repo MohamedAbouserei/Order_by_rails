@@ -3,6 +3,7 @@ class Model < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :fgroups, class_name: "fgroup", foreign_key: "model_id"
-  
+
+  has_many :forders, class_name: "Forder" , foreign_key: "model_id"
+
 end
