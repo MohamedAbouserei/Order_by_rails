@@ -6,8 +6,8 @@ class Friends < ActiveRecord::Migration[5.2]
     end
   add_reference :friends, :model, index: true
   add_foreign_key :friends, :models
-  add_reference :friends, :group, index: true
-  add_foreign_key :friends, :groups
+  add_reference :friends, :fgroup, index: true
+  add_foreign_key :friends, :fgroups
   end
   
 end

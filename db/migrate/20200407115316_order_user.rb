@@ -5,8 +5,8 @@ class OrderUser < ActiveRecord::Migration[5.2]
       end
     add_reference :orderuser, :model, index: true,:null =>false
     add_foreign_key :orderuser, :models
-    add_reference :orderuser, :order, index: true,:null =>false
-    add_foreign_key :orderuser, :orders
+    add_reference :orderuser, :forder, index: true,:null =>false
+    add_foreign_key :orderuser, :forders
     
     
   end
