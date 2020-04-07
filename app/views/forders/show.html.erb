@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Meal:</strong>
+  <%= @forder.meal %>
+</p>
+
+<p>
+  <strong>Resturant:</strong>
+  <%= @forder.resturant %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @forder.image %>
+</p>
+
+<%= link_to 'Edit', edit_forder_path(@forder) %> |
+<%= link_to 'Back', forders_path %>

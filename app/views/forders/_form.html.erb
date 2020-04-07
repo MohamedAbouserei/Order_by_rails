@@ -1,0 +1,32 @@
+<%= form_with(model: forder, local: true) do |form| %>
+  <% if forder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(forder.errors.count, "error") %> prohibited this forder from being saved:</h2>
+
+      <ul>
+      <% forder.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :meal %>
+    <%= form.text_field :meal %>
+  </div>
+
+  <div class="field">
+    <%= form.label :resturant %>
+    <%= form.text_field :resturant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.text_field :image %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

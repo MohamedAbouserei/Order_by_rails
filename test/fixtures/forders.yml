@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  meal: MyString
+  resturant: MyString
+  image: 
+
+two:
+  meal: MyString
+  resturant: MyString
+  image: 

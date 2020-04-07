@@ -1,0 +1,2 @@
+class Forder < ApplicationRecord
+end

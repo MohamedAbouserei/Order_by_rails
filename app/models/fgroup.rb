@@ -1,0 +1,2 @@
+class Fgroup < ApplicationRecord
+end
