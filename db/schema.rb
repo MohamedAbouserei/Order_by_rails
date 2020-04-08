@@ -2,17 +2,17 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `rails
+# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2020_04_07_115316) do
 
-  create_table "fgroups", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "fgroups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_115316) do
     t.index ["model_id"], name: "index_fgroups_on_model_id"
   end
 
-  create_table "forders", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "forders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "meal", limit: 50, null: false
     t.string "resturant", limit: 50, null: false
     t.string "image", limit: 50
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_115316) do
     t.index ["model_id"], name: "index_forders_on_model_id"
   end
 
-  create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_115316) do
     t.index ["model_id"], name: "index_friends_on_model_id"
   end
 
-  create_table "groupuser", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "groupuser", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "model_id", null: false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_115316) do
     t.index ["model_id"], name: "index_groupuser_on_model_id"
   end
 
-  create_table "invitations", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "invitations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "owner_id"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_115316) do
     t.index ["owner_id"], name: "index_invitations_on_owner_id"
   end
 
-  create_table "models", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "models", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name", default: "", null: false
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_115316) do
     t.index ["reset_password_token"], name: "index_models_on_reset_password_token", unique: true
   end
 
-  create_table "notifcations", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "notifcations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "link"
     t.string "title", limit: 50, default: "", null: false
     t.string "color", default: "blue"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_115316) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "orderuser", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "orderuser", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "model_id", null: false

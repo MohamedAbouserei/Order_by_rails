@@ -6,4 +6,6 @@ class Model < ApplicationRecord
 
   has_many :forders, class_name: "Forder" , foreign_key: "model_id"
 
+  has_many :friends, dependent: :destroy
+  has_one :
 end
