@@ -1,6 +1,6 @@
 class FgroupsController < ApplicationController
+  before_action :authenticate_model!
   before_action :set_fgroup, only: [:show, :edit, :update, :destroy]
-
   # GET /fgroups
   # GET /fgroups.json
   def index

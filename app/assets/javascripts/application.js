@@ -24,7 +24,6 @@
 //= require bootstrap-datepicker.js
 //= require jquery.timepicker.min.js
 //= require scrollax.min.js
-//= require google-map.js
 //= require main.js
 //= require_tree .
 //= require rails-ujs
