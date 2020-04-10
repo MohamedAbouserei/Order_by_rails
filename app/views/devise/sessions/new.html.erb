@@ -22,7 +22,9 @@
   <div class="actions">
     <%= f.submit "Log in" %>
   </div>
-<% end %>
+  <%= link_to "Log In with Google",'/auth/google_oauth2' %>
+    <% end %>
+
 
 <%= render "devise/shared/links" %>
 

@@ -7,4 +7,11 @@ class Model < ApplicationRecord
   has_many :forders, class_name: "Forder" , foreign_key: "model_id"
 
   has_many :friends, dependent: :destroy
+  def self.from_omniauth(auth)
+    where(email: auth.info.email).first_or_initialize do |model|
+      model.username = auth.info.name
+      model.email = auth.info.email
+      model.password = SecureRandom.hex
+    end
+  end
 end
