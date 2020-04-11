@@ -1,17 +1,25 @@
 
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css">
 
 <p id="notice"><%= notice %></p>
 
 <h1>Friends</h1>
-
+<div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <ul class="nav nav-list">
+                                    <form id="suggestion_form">
+                                        <li><input id="suggestion" name="suggestion" type="text"
+                                                class="form-control search-query span10" placeholder="Find Projects"
+                                                aria-label="Username" aria-describedby="basic-addon1">
+                                        </li>
+                                        <ul class="list-group" style="background-color: white; position: absolute;
+                                    width: 18em; z-index: 100;" id="searchbox">
+                                    
+                  </ul>
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
 
 <table id="example" class="table display" style="width:80%">
 <thead>
@@ -66,4 +74,37 @@
 $(document).ready(function() {
     $('#example').DataTable();
 } );
+</script>
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $('#suggestion_form').keyup(function () {
+        $form = $(this)
+        var formData = new FormData(this);
+        var username=document.getElementById('suggestion').value
+        var query = $(this).val();
+        $.ajax({
+            url: "/search",
+            type: 'GET',
+            data: {username : username},
+            
+            success: function (data) {
+                console.log(JSON.parse(data["message"]));
+                data["message"] = JSON.parse(data["message"])
+                $("#searchbox").css("display", "block");
+                $("#searchbox").empty()
+                for (i in data["message"]) {
+                    $('#searchbox').append('<li class="list-group-item" ><div style="float:left"><a id="' +
+                        i + '" href="/project/' + i + '/details">' + data[
+                            "message"][i].username + '</div></a><div style="float:right"> <input type="checkbox"></div><br></li>');
+                    $('#' + i + '').click();
+                }
+            },
+            failure: function (data) {
+                console.log("FAIL");
+                console.log(data);
+            }
+        });
+    });
+});
 </script>

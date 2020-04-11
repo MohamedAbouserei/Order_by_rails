@@ -1,3 +1,5 @@
+require 'json'
+
 class FriendsController < ApplicationController
   before_action :set_friend, only: [:show, :edit, :update, :destroy]
 
@@ -72,4 +74,17 @@ class FriendsController < ApplicationController
     def friend_params
       params.fetch(:friend, {})
     end
+    public
+    def search_users 
+      
+      respond_to do |format|
+        @people = Model.where("username LIKE :username OR email = :username",{:username => "#{params[:username]}%", :email => params[:username]})  
+        puts @people.to_json
+
+        msg = { :id => "ok",:message =>  @people.to_json ,:html => "<b>...</b>"  }
+        format.json  { render :json => msg } # don't do msg.to_json
+      end
+    end
+  
+    
 end
