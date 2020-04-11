@@ -1,4 +1,4 @@
-class Notifications < ActiveRecord::Migration[5.2]
+class Notifcations < ActiveRecord::Migration[5.2]
   def change
     create_table :notifcations do |t | 
       t.column "link", :string 
