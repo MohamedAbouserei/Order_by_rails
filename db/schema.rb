@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_150350) do
+ActiveRecord::Schema.define(version: 2020_04_09_205230) do
 
   create_table "fgroups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -31,13 +31,13 @@ ActiveRecord::Schema.define(version: 2020_04_10_150350) do
   end
 
   create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "status", null: false
+    t.boolean "action", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "model_id"
-    t.bigint "fgroup_id"
-    t.index ["fgroup_id"], name: "index_friends_on_fgroup_id"
-    t.index ["model_id"], name: "index_friends_on_model_id"
+    t.bigint "request_id"
+    t.bigint "reciver_id"
+    t.index ["reciver_id"], name: "index_friends_on_reciver_id"
+    t.index ["request_id"], name: "index_friends_on_request_id"
   end
 
   create_table "groupuser", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -71,8 +71,6 @@ ActiveRecord::Schema.define(version: 2020_04_10_150350) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
-    t.string "google_token"
-    t.string "google_refresh_token"
     t.index ["email"], name: "index_models_on_email", unique: true
     t.index ["reset_password_token"], name: "index_models_on_reset_password_token", unique: true
     t.index ["username"], name: "index_models_on_username", unique: true
@@ -82,9 +80,14 @@ ActiveRecord::Schema.define(version: 2020_04_10_150350) do
     t.string "link"
     t.string "title", limit: 50, default: "", null: false
     t.string "color", default: "blue"
+    t.string "icon"
+    t.boolean "seen", default: false
+    t.boolean "watch", default: false
     t.string "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "owner_id"
+    t.index ["owner_id"], name: "index_notifcations_on_owner_id"
   end
 
   create_table "orderuser", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -98,13 +101,14 @@ ActiveRecord::Schema.define(version: 2020_04_10_150350) do
 
   add_foreign_key "fgroups", "models"
   add_foreign_key "forders", "models"
-  add_foreign_key "friends", "fgroups"
-  add_foreign_key "friends", "models"
+  add_foreign_key "friends", "models", column: "reciver_id"
+  add_foreign_key "friends", "models", column: "request_id"
   add_foreign_key "groupuser", "fgroups"
   add_foreign_key "groupuser", "models"
   add_foreign_key "invitations", "fgroups"
   add_foreign_key "invitations", "models"
   add_foreign_key "invitations", "models", column: "owner_id"
+  add_foreign_key "notifcations", "models", column: "owner_id"
   add_foreign_key "orderuser", "forders"
   add_foreign_key "orderuser", "models"
 end

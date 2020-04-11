@@ -24,8 +24,7 @@ class FgroupsController < ApplicationController
   # POST /fgroups
   # POST /fgroups.json
   def create
-    @fgroup = Fgroup.new(fgroup_params)
-
+    @fgroup = Fgroup.new(fgroup_params.merge(:model_id => current_model.id))
     respond_to do |format|
       if @fgroup.save
         format.html { redirect_to @fgroup, notice: 'Fgroup was successfully created.' }

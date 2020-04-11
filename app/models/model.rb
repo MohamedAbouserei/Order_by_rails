@@ -5,7 +5,7 @@ class Model < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :forders, class_name: "Forder" , foreign_key: "model_id"
-
+  has_many :notifcations, class_name: "Notifcation" ,foreign_key: "owner_id"
   has_many :friends, dependent: :destroy
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize do |model|

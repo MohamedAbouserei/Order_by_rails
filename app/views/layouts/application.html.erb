@@ -7,7 +7,10 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  
+    <link rel="stylesheet" href="/css/tables.css">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css">
+    
+
 
   </head>
 
@@ -26,12 +29,99 @@
         <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-        
+        <li class="nav-item dropdown mr-4">
+        <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown"
+            id="notificationDropdown" href="#" data-toggle="dropdown" onclick="zero()">
+            <span class="notification" id="number"><%= current_model.notifcations.select{|notifcation| notifcation.watch==false}.count=%></span>
+            <i class="mdi mdi-bell mx-0" id="bell">
+
+            </i>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+            aria-labelledby="notificationDropdown" id="maxy"
+            style="overflow-y: auto; max-height: 480px;">
+            <p class="mb-0 font-weight-normal float-left dropdown-header" id='notificationHeader'>
+               Notifications
+            </p>
+
+            <% current_model.notifcations.order(updated_at: :desc).each do |notifcation| %>
+              <% if notifcation.seen == false %>
+            <a class="dropdown-item" style="background-color: #E9EBEE;  border-bottom: 1px solid #dadada;"
+                href="<%= notifcation.link =%>" id="max<%= notifcation.link =%>" value="<%= notifcation.id =%>">
+                <div class="item-thumbnail">
+                    <div class="item-icon <%= notifcation.color =%>">
+                        <i class="<%= notifcation.icon =%> mx-0"></i>
+                    </div>
+                </div>
+                <div class="item-content">
+                    <h6 class="font-weight-normal">
+                       
+                    <%= notifcation.title =%>
+                        
+                    </h6>
+                    <p class="font-weight-light small-text mb-0 text-muted">
+                    <%= notifcation.text =%>
+                    </p>
+                    <p class="font-weight-light small-text mb-0 text-muted" style="font-size:0.8em;">
+                    <%= notifcation.updated_at =%>
+                    </p>
+
+                </div>
+            </a>
+           <% else %>
+            <a class="dropdown-item card-body" style="border-bottom: 1px solid #dadada;"
+                href="<%= notifcation.link =%>" id="max<%= notifcation.id =%>" value="<%= notifcation.id =%>">
+                <div class="item-thumbnail">
+                    <div class="item-icon <%= notifcation.color =%>">
+                        <i class="<%= notifcation.icon =%> mx-0"></i>
+                    </div>
+                </div>
+                <div class="item-content">
+                    <h6 class="font-weight-normal">
+                       
+                    <%= notifcation.title =%>
+                    </h6>
+                    <p class="font-weight-light small-text mb-0 text-muted">
+                      
+                    <%= notifcation.text =%>
+                        
+                    </p>
+                    <p class='font-weight-light small-text mb-0 text-muted' style='font-size:0.8em;'>
+                    <%= notifcation.updated_at =%>
+                    </p>
+                </div>
+            </a>
+           <% end %>
+           <% end %>
+
+            <% if current_model.notifcations.count == 0 %>
+            
+            <a class="dropdown-item" id='no-notification'
+                style="background-color: #E9EBEE;  border-bottom: 1px solid #dadada;">
+                <div class="item-content">
+                    <h6 class="font-weight-normal" style="margin-top: 0.5rem;">
+                        No Notification Yet
+                    </h6>
+                </div>
+            </a>
+            <% end %>
+        </div>
+    </li>
+
+
+
+
+
+
+
+
       </ul>
       <ul class="hmenu">
   <%= render 'devise/menu/registration_items' %>
   <%= render 'devise/menu/login_items' %>
-</ul>
+  
+  </ul>
     </div>
   </div>
 </nav>
@@ -106,11 +196,157 @@
 
 
 
-  <!-- loader -->
+  <!-- loader 
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  -->
 
 
-
+  <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
+  <script type="text/javascript" data-id="<%= current_model.id =%>" id='toPushID' >
+      function zero() {
+          var bell = document.getElementById('number');
+          var text = bell.innerHTML;
+  
+          if(text != 0){
+              bell.style.display = 'none';
+              bell.innerHTML = 0;
+  
+                  $.ajax({
+                      type: 'GET',
+                      url: '/watchNotification',
+                      data:{},
+                      success: function (response) {
+                      },
+                      error: function(error){
+                          console.log(error);
+                      }
+                  });
+          }
+  
+      }
+  
+      // Enable pusher logging - don't include this in production
+      // Pusher.logToConsole = true;
+  
+      var pusher = new Pusher('fdc7948d55ef0e9cbfc4', {
+          cluster: "eu",
+          encrypted: true,
+      });
+  
+      var user = $('#toPushID').data('id');
+  
+      // Subscribe to the channel we specified in our Rails Event
+      var channel = pusher.subscribe('action' + user);
+  
+      // Bind a function to a Event (the full Rails class)
+      channel.bind('my-event', function (data) {
+          var currentDate = new Date();
+  
+          var date = currentDate.getDate();
+          var month = currentDate.getMonth(); //Be careful! January is 0 not 1
+          var year = currentDate.getFullYear();
+          var hour = currentDate.getHours();
+          var mintues = currentDate.getMinutes(); 
+          var seconds = currentDate.getSeconds();
+          var dateString = year + "-" + (month + 1) + "-" + date + " " + hour + ":" + mintues + ":" + seconds;
+          var ul = document.getElementById("maxy");
+          var li = document.createElement('div');
+          li.className = 'item-content';
+  
+          var des = document.getElementById('number');
+          des.removeAttribute("hidden");
+          des.style.display = 'block';
+          var not = parseInt(document.getElementById('number').innerHTML);
+          des.innerHTML = not + 1;
+  
+  
+          var a = document.createElement('a');
+          a.setAttribute("style", "background-color: #e0e2e8;");
+          a.setAttribute("id", "max" + data.d);
+  
+          a.setAttribute("href", data.page);
+  
+          a.setAttribute("value", data.d);
+          a.className = 'dropdown-item';
+          var p = document.createElement('p');
+          var p2 = document.createElement('p');
+  
+          p.className = 'font-weight-light small-text mb-0 text-muted';
+          p2.className = 'font-weight-light small-text mb-0 text-muted';
+          p2.setAttribute("style", "font-size:0.8em;");
+  
+          var h = document.createElement('h6');
+          h.className = 'font-weight-normal';
+  
+          var thum = document.createElement('div');
+          thum.className = 'item-thumbnail';
+  
+          var item = document.createElement('div');
+          item.className = 'item-icon '+data.color;
+  
+          var i = document.createElement('i');
+          i.className = data.icon +' mx-0';
+  
+          item.appendChild(i);
+          thum.appendChild(item);
+          
+              p.appendChild(document.createTextNode(data.message));
+          
+          p2.innerHTML = dateString;
+          
+              h.appendChild(document.createTextNode(data.title));
+          
+          li.appendChild(h);
+          li.appendChild(p);
+          li.appendChild(p2);
+          a.appendChild(thum);
+          a.appendChild(li);
+          console.log(a)
+          var notificationHeader = document.getElementById("notificationHeader");
+          notificationHeader.parentNode.insertBefore(a, notificationHeader.nextSibling);
+  
+          var noNotification = document.getElementById("no-notification");
+          if(noNotification != null){
+              noNotification.remove();
+          }
+  
+          $('#max'+ data.d).on('click', function () {
+              $value = $(this).attr('value');
+              $.ajax({
+                  type: 'get',
+                  url: '/updateseen',
+                  data: {
+                      'seen': $value
+                  },
+                  success: function (data) {
+                      $('nav').html(data);
+                      console.log(data)
+                  }
+              });
+          });
+  
+      });
+  </script>
+  
+  <script type="text/javascript">
+      $(function () {
+          $('a[id^="max"]').on('click', function () {
+              $value = $(this).attr('value');
+              $.ajax({
+                  url: '/updateseen',
+                  type: 'get',
+                  data: {
+                      'seen': $value
+                  },
+                  success: function (data) {
+                      $('nav').html(data);
+                  }
+              });
+          });
+      });
+  
+  </script>
+  
 
   </body>
 </html>
