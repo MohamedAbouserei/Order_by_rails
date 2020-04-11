@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_model! 
   before_action :configure_permitted_parameters, if: :devise_controller?
-  after_action :set_details
+  # after_action :set_details
   layout :layout
   protected
 
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     #@notifcations=current_model.notifcations
   end
   
-  def set_details        
-    Notifcation.savenotify(1,"text","http://localhost:3000/fgroups","new notififcation","blue","mdi mdi-bell")
-  end
+  # def set_details        
+  #   Notifcation.savenotify(1,"text","http://localhost:3000/fgroups","new notififcation","blue","mdi mdi-bell")
+  # end
 end

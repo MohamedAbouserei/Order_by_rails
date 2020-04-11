@@ -20,18 +20,8 @@ class NotifcationsController < ApplicationController
           link: link,
           icon: icon
         })
-        
+        Notifcation.savenotify(id,text,title,link,color,icon)
       end
-      # def self.test(id,text,link,title,color="blue",icon="mdi mdi-bell")
-      #   @notifcations=Notifcation.new
-      #   @notifcations.owner_id = id
-      #   @notifcations.text = text
-      #   @notifcations.title = title
-      #   @notifcations.link = link 
-      #   @notifcations.color = color
-      #   @notifcations.icon= icon
-      #   @notifcations.save
-      # end
       
     #   def send_to_group(id,text,link,title,color="blue",icon="mdi mdi-bell")
         
