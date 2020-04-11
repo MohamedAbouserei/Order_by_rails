@@ -10,7 +10,9 @@ class Notifcations < ActiveRecord::Migration[5.2]
       t.string "text", :null => false  
       t.timestamps  
 end
-add_reference :notifcations, :owner, index: true , foreign_key: { to_table: :models }
+add_reference :notifcations, :model, index: true 
+add_foreign_key :notifcations, :models
+
 
 end
 end

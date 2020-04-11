@@ -86,8 +86,8 @@ ActiveRecord::Schema.define(version: 2020_04_09_205230) do
     t.string "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "owner_id"
-    t.index ["owner_id"], name: "index_notifcations_on_owner_id"
+    t.bigint "model_id"
+    t.index ["model_id"], name: "index_notifcations_on_model_id"
   end
 
   create_table "orderuser", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_205230) do
   add_foreign_key "invitations", "fgroups"
   add_foreign_key "invitations", "models"
   add_foreign_key "invitations", "models", column: "owner_id"
-  add_foreign_key "notifcations", "models", column: "owner_id"
+  add_foreign_key "notifcations", "models"
   add_foreign_key "orderuser", "forders"
   add_foreign_key "orderuser", "models"
 end
