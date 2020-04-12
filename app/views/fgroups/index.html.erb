@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>groups</h1>
+<h1>Fgroups</h1>
 
 <table>
   <thead>
@@ -14,11 +14,9 @@
     <% @fgroups.each do |fgroup| %>
       <tr>
         <td><%= fgroup.name %></td>
-        <td><%= link_to 'Show', fgroup ,method: :get %></td>
-        <% if fgroup.model_id == current_model.id %>
+        <td><%= link_to 'Show', fgroup %></td>
         <td><%= link_to 'Edit', edit_fgroup_path(fgroup) %></td>
         <td><%= link_to 'Destroy', fgroup, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
       </tr>
     <% end %>
   </tbody>
