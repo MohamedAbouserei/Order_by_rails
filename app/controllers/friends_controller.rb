@@ -17,8 +17,19 @@ class FriendsController < ApplicationController
 
   # GET /friends/new
   def new
-    @friend = Friend.new
+    friend = Friend.new
+    friend.request_id=current_model.id
+    friend.reciver_id=params[:id]
+    body=Model.find(params[:id]).username+" has  sent you a freind request "
+    Notifcation.savenotify(params[:id].to_i,body,"http://localhost:3000/fgroups","new friend reqeust","red","mdi mdi-bell")
+    
+    friend.save
+    respond_to do |format|
+      msg = { :id => "ok",:message => "sent" ,:html => "<b>...</b>"  }
+      format.json  { render :json => msg } # don't do msg.to_json
+    #puts friend.errors.full_messages
   end
+end
 
   # GET /friends/1/edit
   def edit
@@ -78,9 +89,14 @@ class FriendsController < ApplicationController
     def search_users 
       
       respond_to do |format|
-        @people = Model.where("username LIKE :username OR email = :username",{:username => "#{params[:username]}%", :email => params[:username]})  
-        puts @people.to_json
-
+        @people = Model.where("username LIKE :username OR email LIKE :username",{:username => "#{params[:username]}%"}).select{ |model| model.id !=  current_model.id  }
+        current_model.tasks.each do |fri|
+        @people.delete_if do |element|
+            if fri.request_id == element.id or fri.reciver_id == element.id  
+            true 
+           end
+        end
+        end
         msg = { :id => "ok",:message =>  @people.to_json ,:html => "<b>...</b>"  }
         format.json  { render :json => msg } # don't do msg.to_json
       end
