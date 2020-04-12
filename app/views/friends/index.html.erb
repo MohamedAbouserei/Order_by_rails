@@ -10,15 +10,21 @@
     <label for="exampleInputEmail1">Email address</label>
     <ul class="nav nav-list">
                                     <form id="suggestion_form">
-                                        <li><input id="suggestion" name="suggestion" type="text"
-                                                class="form-control search-query span10" placeholder="Find Projects"
+                                        
+                                    <li>
+                                        
+                                        <input id="suggestion" name="suggestion" type="text"
+                                                class="form-control search-query span10" placeholder="Find Friends"
                                                 aria-label="Username" aria-describedby="basic-addon1" autocomplete="off">
                                         </li>
                                         <ul class="list-group chks" style="background-color: white; position: absolute;
                                     width: 18em; z-index: 100;" id="searchbox">
                                     
                   </ul>
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.<button onclick="notify()"> Check </button></small>
+                  <div style="float:right">
+                                        <button onclick="notify()" class="btn btn-primary py-3 px-5"> send request </button>
+                                        </div>
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     
 
     </div>
