@@ -5,6 +5,9 @@ class FordersController < ApplicationController
   # GET /forders.json
   def index
     @forders = Forder.all
+    @friends = current_model.friends
+    p @friends
+    print "######################################################################################"
   end
 
   # GET /forders/1

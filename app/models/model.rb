@@ -6,7 +6,11 @@ class Model < ApplicationRecord
 
   has_many :forders, class_name: "Forder" , foreign_key: "model_id"
 
-  has_many :friends, dependent: :destroy
+  has_many :model, foreign_key: :model_id, class_name: 'Friend'
+  has_many :friends, through: :model
+  
+  has_many :model_friend, foreign_key: :friend_id, class_name: 'Friend'
+  has_many :models, through: :model_friend
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize do |model|
       model.username = auth.info.name
