@@ -5,7 +5,7 @@ class FordersController < ApplicationController
   # GET /forders.json
   def index
     @forders = Forder.all
-    @friends = current_model.friends
+    @friends = current_model.tasks
     p @friends
     print "######################################################################################"
   end

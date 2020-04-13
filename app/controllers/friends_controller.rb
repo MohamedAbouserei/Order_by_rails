@@ -6,8 +6,8 @@ class FriendsController < ApplicationController
   # GET /friends
   # GET /friends.json
   def index 
+    @friendrequest=Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action == false }
     @friends = Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action }
-    
   end
 
   # GET /friends/1
@@ -21,7 +21,7 @@ class FriendsController < ApplicationController
     friend.request_id=current_model.id
     friend.reciver_id=params[:id]
     body=Model.find(params[:id]).username+" has  sent you a freind request "
-    Notifcation.savenotify(params[:id].to_i,body,"http://localhost:3000/respond","new friend reqeust","red","mdi mdi-bell")
+    Notifcation.savenotify(params[:id].to_i,body,"http://localhost:3000/friends","new friend reqeust","red","mdi mdi-bell")
     
     friend.save
     respond_to do |format|
@@ -100,6 +100,13 @@ end
         msg = { :id => "ok",:message =>  @people.to_json ,:html => "<b>...</b>"  }
         format.json  { render :json => msg } # don't do msg.to_json
       end
+    end
+    def approvereq
+    @friend = Friend.find(params[:id])
+    @friend.action=1
+    @friend.action
+    @friend.save
+    redirect_to friends_path ,action: "index"
     end
   
     

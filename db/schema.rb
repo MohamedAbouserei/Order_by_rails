@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_11_154522) do
+ActiveRecord::Schema.define(version: 2020_04_09_205230) do
 
   create_table "fgroups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -36,10 +36,6 @@ ActiveRecord::Schema.define(version: 2020_04_11_154522) do
     t.datetime "updated_at", null: false
     t.bigint "request_id"
     t.bigint "reciver_id"
-    t.bigint "friend_id"
-    t.bigint "model_id"
-    t.index ["friend_id"], name: "index_friends_on_friend_id"
-    t.index ["model_id"], name: "index_friends_on_model_id"
     t.index ["reciver_id"], name: "index_friends_on_reciver_id"
     t.index ["request_id"], name: "index_friends_on_request_id"
   end
@@ -105,8 +101,6 @@ ActiveRecord::Schema.define(version: 2020_04_11_154522) do
 
   add_foreign_key "fgroups", "models"
   add_foreign_key "forders", "models"
-  add_foreign_key "friends", "friends"
-  add_foreign_key "friends", "models"
   add_foreign_key "friends", "models", column: "reciver_id"
   add_foreign_key "friends", "models", column: "request_id"
   add_foreign_key "groupuser", "fgroups"

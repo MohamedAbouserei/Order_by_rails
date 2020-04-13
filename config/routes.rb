@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get '/updateseen' ,to: 'notifcations#updateseen'
   get '/search',to: 'friends#search_users'
   get '/addrequest',to: 'friends#new'
+  #get '/',to: 'application#home'
+  get '/approvereq/:id', to: 'friends#approvereq'
   resources :friends
 
   resources :fgroups
