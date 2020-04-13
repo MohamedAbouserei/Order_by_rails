@@ -1,5 +1,7 @@
 {
   "name": "Order",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@mdi/font": "^5.0.45"
+  }
 }
