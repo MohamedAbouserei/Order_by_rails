@@ -5,12 +5,6 @@ class Model < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :forders, class_name: "Forder" , foreign_key: "model_id"
-
-  has_many :model, foreign_key: :model_id, class_name: 'Friend'
-  has_many :friends, through: :model
-  
-  has_many :model_friend, foreign_key: :friend_id, class_name: 'Friend'
-  has_many :models, through: :model_friend
   has_many :notifcations, class_name: "Notifcation"
   has_many :tasks
   def tasks
