@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   get '/',to: 'home#index'
   get '/approvereq/:id', to: 'friends#approvereq'
   resources :friends
-  post '/forders/add_friends' ,to: 'forders#add_friends',as: 'add_friends'
+  post '/forders/:order_id/add_friends' ,to: 'forders#add_friends',as: 'add_friends'
+  post '/forders/:order_id/add_meal' ,to: 'forders#add_meal',as: 'add_meal'
 
   resources :fgroups
   resources :forders

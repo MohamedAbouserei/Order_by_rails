@@ -8,18 +8,33 @@ class FordersController < ApplicationController
     @friends = current_model.tasks
   end
 def add_friends
-  p params['friends_ids']
-  for friend in params['friends_ids'] do
-    Notifcation.savenotify(friend,current_model.username+" wants to add you to an order","http://localhost:3000/forders","new notififcation","blue","mdi mdi-bell") 
+  url_to_order= "http://localhost:3000/forders/"
+  url_to_order.concat(params['order_id'])
+  if params['friends_ids']
+    for friend in params['friends_ids'] do
+      Notifcation.savenotify(friend,current_model.username+" wants to add you to an order",url_to_order,"new notififcation","blue","mdi mdi-bell") 
+    end
   end
-  print "######################################################################################"
-  redirect_to forders_url
+  redirect_to forder_url(params['order_id'])
 end
   # GET /forders/1
   # GET /forders/1.json
   def show
     @friends = current_model.tasks
+    @meals = @forder.meals
+    p @meals
+    p "######################################################################################################3"
+  end
 
+  def add_meal
+    if params['meal_text']
+      meal = Orderuser.new
+      meal.model = current_model
+      meal.meal = params['meal_text']
+      meal.forder_id = params['order_id']
+      meal.save
+    end
+    redirect_to forder_url(params['order_id'])
   end
 
   # GET /forders/new

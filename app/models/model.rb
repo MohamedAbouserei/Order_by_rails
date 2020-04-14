@@ -7,6 +7,7 @@ class Model < ApplicationRecord
   has_many :forders, class_name: "Forder" , foreign_key: "model_id"
   has_many :notifcations, class_name: "Notifcation"
   has_many :tasks
+  has_many :meals, class_name: "Orderuser"
   def tasks
     Friend.where("request_id = ? OR reciver_id = ?", self.id, self.id)
     

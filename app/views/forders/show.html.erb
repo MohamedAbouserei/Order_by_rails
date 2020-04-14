@@ -20,124 +20,172 @@
     <div class="card-text">
     <p>
     <strong>Meal:</strong>
-    <%= @forder.meal %>
+    <%= @forder.meal %></br>
+    <% @meals.each do |meal| %>
+      <tr>
+        <td><%= meal.meal %></td>
+        <td> By: <%= meal.model.username %></td>
+      </tr></br>
+    <% end %>
   </p>
     </div>
   </div>
 </div>
+<% if current_model.id == @forder.model_id%>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add friends</button>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="Add friends" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header" style="display: block;">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel" style="color: grey;">Add People</h4>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add friends</button>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="Add friends" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="display: block;">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                 <h4 class="modal-title" id="myModalLabel" style="color: grey;">Add People</h4>
+              </div>
+            <%= form_tag(add_friends_path(@forder)) do %>
+              <div class="modal-body">
+                  <div role="tabpanel">
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs" role="tablist">
+                          <li role="presentation" class="active" style="margin-right: 10px;"><a href="#friendsTab" aria-controls="friendsTab" role="tab" data-toggle="tab">Friends</a>
 
-            </div>
-          <%= form_tag(add_friends_path) do %>
-            <div class="modal-body">
-                <div role="tabpanel">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active" style="margin-right: 10px;"><a href="#friendsTab" aria-controls="friendsTab" role="tab" data-toggle="tab">Friends</a>
+                          </li>
+                          <li role="presentation"><a href="#groupsTab" aria-controls="groupsTab" role="tab" data-toggle="tab">Groups</a>
 
-                        </li>
-                        <li role="presentation"><a href="#groupsTab" aria-controls="groupsTab" role="tab" data-toggle="tab">Groups</a>
-
-                        </li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="friendsTab">
-                          <div class="row">
-                            <% @friends.each do |friend| %>
-                              <div class="col-6">
-                              <label>
-                              <% if friend.reciver.id == current_model.id  %>
-                              <%= check_box_tag 'friends_ids[]', friend.request.id %>
-                              
-                                <div class="card hover-shadow">
-                                  <div class="card-body text-center pt-1 pb-20">
-                                    <a class="friend-card" href="#">
-                                      <img class="avatar friend-card" src="https://bootdey.com/img/Content/avatar/avatar2.png">
-                                    </a>
-                                    
-                                    <h5 class="mt-2 mb-0 friend-card"><a class="hover-primary" href="#"><%= friend.request.username %></a></h5>
-                                    <span>Designer</span>
-                                    <div class="mt-20">
-                                      <span class="badge badge-default">Photoshop</span>
-                                      <span class="badge badge-default">Illustrator</span>
-                                      <span class="badge badge-default">Animation</span>
+                          </li>
+                      </ul>
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                          <div role="tabpanel" class="tab-pane active" id="friendsTab">
+                            <div class="row">
+                              <% @friends.each do |friend| %>
+                                <div class="col-6">
+                                <label>
+                                <% if friend.reciver.id == current_model.id  %>
+                                <%= check_box_tag 'friends_ids[]', friend.request.id %>
+                                
+                                  <div class="card hover-shadow">
+                                    <div class="card-body text-center pt-1 pb-20">
+                                      <a class="friend-card" href="#">
+                                        <img class="avatar friend-card" src="https://bootdey.com/img/Content/avatar/avatar2.png">
+                                      </a>
+                                      
+                                      <h5 class="mt-2 mb-0 friend-card"><a class="hover-primary" href="#"><%= friend.request.username %></a></h5>
+                                      <span>Designer</span>
+                                      <div class="mt-20">
+                                        <span class="badge badge-default">Photoshop</span>
+                                        <span class="badge badge-default">Illustrator</span>
+                                        <span class="badge badge-default">Animation</span>
+                                      </div>
                                     </div>
+
+                                    <footer class="card-footer flexbox">
+                                      
+                                      <div>
+                                        <i class="fa fa-map-marker pr-1"></i>
+                                        <span>Blackwood, NJ</span>
+                                      </div>
+                                      <div>
+                                        <i class="fa fa-money pr-1"></i>
+                                        <span>$55 / hour</span>
+                                      </div>
+                                      
+                                    </footer>
                                   </div>
-
-                                  <footer class="card-footer flexbox">
-                                    
-                                    <div>
-                                      <i class="fa fa-map-marker pr-1"></i>
-                                      <span>Blackwood, NJ</span>
-                                    </div>
-                                    <div>
-                                      <i class="fa fa-money pr-1"></i>
-                                      <span>$55 / hour</span>
-                                    </div>
-                                    
-                                  </footer>
+                                  </label>
                                 </div>
-                                </label>
+                                <% else %>
+                                  <%= check_box_tag 'friends_ids[]', friend.reciver.id %>
+                                
+                                  <div class="card hover-shadow">
+                                    <div class="card-body text-center pt-1 pb-20">
+                                      <a class="friend-card" href="#">
+                                        <img class="avatar friend-card" src="https://bootdey.com/img/Content/avatar/avatar2.png">
+                                      </a>
+                                <h5 class="mt-2 mb-0 friend-card"><a class="hover-primary" href="#"><%= friend.reciver.username %></a></h5>
+                                <span>Designer</span>
+                                <div class="mt-20">
+                                  <span class="badge badge-default">Photoshop</span>
+                                  <span class="badge badge-default">Illustrator</span>
+                                  <span class="badge badge-default">Animation</span>
+                                </div>
                               </div>
-                              <% else %>
-                                <%= check_box_tag 'friends_ids[]', friend.reciver.id %>
-                              
-                                <div class="card hover-shadow">
-                                  <div class="card-body text-center pt-1 pb-20">
-                                    <a class="friend-card" href="#">
-                                      <img class="avatar friend-card" src="https://bootdey.com/img/Content/avatar/avatar2.png">
-                                    </a>
-                              <h5 class="mt-2 mb-0 friend-card"><a class="hover-primary" href="#"><%= friend.reciver.username %></a></h5>
-                              <span>Designer</span>
-                              <div class="mt-20">
-                                <span class="badge badge-default">Photoshop</span>
-                                <span class="badge badge-default">Illustrator</span>
-                                <span class="badge badge-default">Animation</span>
-                              </div>
-                            </div>
 
-                            <footer class="card-footer flexbox">
-                              
-                              <div>
-                                <i class="fa fa-map-marker pr-1"></i>
-                                <span>Blackwood, NJ</span>
-                              </div>
-                              <div>
-                                <i class="fa fa-money pr-1"></i>
-                                <span>$55 / hour</span>
-                              </div>
-                              
-                            </footer>
+                              <footer class="card-footer flexbox">
+                                
+                                <div>
+                                  <i class="fa fa-map-marker pr-1"></i>
+                                  <span>Blackwood, NJ</span>
+                                </div>
+                                <div>
+                                  <i class="fa fa-money pr-1"></i>
+                                  <span>$55 / hour</span>
+                                </div>
+                                
+                              </footer>
+                            </div>
+                            </label>
                           </div>
-                          </label>
-                        </div>
+                                <% end %>
                               <% end %>
-                            <% end %>
+                            </div>
                           </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="groupsTab">Groups Tab</div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <%= submit_tag 'Send', :class => "btn btn-primary save" %>
-            </div>
-          <% end %>
-        </div>
-    </div>
-</div>
+                          <div role="tabpanel" class="tab-pane" id="groupsTab">Groups Tab</div>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <%= submit_tag 'Send', :class => "btn btn-primary save" %>
+              </div>
+            <% end %>
+          </div>
+      </div>
+  </div>
+<% end %>
+
+ <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mealModal">Add Meal</button>
+  <!-- Modal -->
+  <div class="modal fade" id="mealModal" tabindex="-1" role="dialog" aria-labelledby="Add Meal" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header" style="display: block;">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel" style="color: grey;">Add People</h4>
+
+              </div>
+            <%= form_tag(add_meal_path(@forder)) do %>
+              <div class="modal-body">
+                  <div role="tabpanel">
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs" role="tablist">
+                          <li role="presentation" class="active" style="margin-right: 10px;"><a href="#mealTab" aria-controls="mealTab" role="tab" data-toggle="tab">Meal</a>
+                          </li>
+                      </ul>
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                          <div role="tabpanel" class="tab-pane active" id="mealTab">
+                            <div class="row">
+                              <%= text_area_tag :meal_text, "", style: "color: black; background-color: white;" %>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <%= submit_tag 'Add Meal', :class => "btn btn-primary save" %>
+              </div>
+            <% end %>
+          </div>
+      </div>
+  </div>
+
 
 <%= link_to 'Back', forders_path %>
 <style>
