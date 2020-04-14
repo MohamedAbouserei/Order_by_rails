@@ -10,6 +10,8 @@ class FgroupsController < ApplicationController
   # GET /fgroups/1
   # GET /fgroups/1.json
   def show
+    @friends = Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action }
+
   end
 
   # GET /fgroups/new
