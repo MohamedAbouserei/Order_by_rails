@@ -5,11 +5,16 @@ class FordersController < ApplicationController
   # GET /forders.json
   def index
     @forders = Forder.all
-    @friends = current_model.friends
-    p @friends
-    print "######################################################################################"
+    @friends = current_model.tasks
   end
-
+def add_friends
+  p params['friends_ids']
+  for friend in params['friends_ids'] do
+    Notifcation.savenotify(friend,current_model.username+" wants to add you to an order","http://localhost:3000/forders","new notififcation","blue","mdi mdi-bell") 
+  end
+  print "######################################################################################"
+  redirect_to forders_url
+end
   # GET /forders/1
   # GET /forders/1.json
   def show

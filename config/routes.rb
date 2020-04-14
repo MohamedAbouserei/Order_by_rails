@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/search',to: 'friends#search_users'
   get '/addrequest',to: 'friends#new'
   resources :friends
+  post '/forders/add_friends' ,to: 'forders#add_friends',as: 'add_friends'
 
   resources :fgroups
   resources :forders
