@@ -20,3 +20,17 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+
+<%= form_with(model: fgroup1, local: true) do |form| %>
+  
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

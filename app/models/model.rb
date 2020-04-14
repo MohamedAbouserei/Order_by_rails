@@ -9,7 +9,7 @@ class Model < ApplicationRecord
   has_many :tasks
   has_many :meals, class_name: "Orderuser"
   def tasks
-    Friend.where("request_id = ? OR reciver_id = ?", self.id, self.id)
+    Friend.where("request_id = ? OR reciver_id = ? and action = 1", self.id, self.id)
     
   end
   def self.from_omniauth(auth)
