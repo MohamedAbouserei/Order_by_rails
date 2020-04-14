@@ -9,7 +9,6 @@ class FordersController < ApplicationController
 def add_friends
   url_to_order= "http://localhost:3000/forders/"
   url_to_order.concat(params['order_id'])
-  p params
   if params['friends_ids']
     for friend in params['friends_ids'] do
       Notifcation.savenotify(friend,current_model.username+" wants to add you to an order",url_to_order,"new notififcation","blue","mdi mdi-bell") 
@@ -26,7 +25,7 @@ def add_friends
       for user in group_users do
         Notifcation.savenotify(user,current_model.username+" wants to add you to an order",url_to_order,"new notififcation","blue","mdi mdi-bell") 
         order_user = Orderuser.new
-        order_user.model_id = current_model.id
+        order_user.model_id = user
         order_user.forder_id = params['order_id']
         order_user.save
       end
