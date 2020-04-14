@@ -5,14 +5,31 @@ class FordersController < ApplicationController
   # GET /forders.json
   def index
     @forders = current_model.forders
-    @friends = current_model.tasks
   end
 def add_friends
   url_to_order= "http://localhost:3000/forders/"
   url_to_order.concat(params['order_id'])
+  p params
   if params['friends_ids']
     for friend in params['friends_ids'] do
       Notifcation.savenotify(friend,current_model.username+" wants to add you to an order",url_to_order,"new notififcation","blue","mdi mdi-bell") 
+      order_user = Orderuser.new
+      order_user.model_id = friend
+      order_user.forder_id = params['order_id']
+      order_user.save
+    end
+  end
+  if params['group_ids']
+    users_in_order = Orderuser.where(:forder_id => params['order_id']).pluck(:model_id) #get ids of users in order
+    for group in params['group_ids'] do
+      group_users = Fgroup.find(group).groupUsers.pluck(:model_id)- users_in_order
+      for user in group_users do
+        Notifcation.savenotify(user,current_model.username+" wants to add you to an order",url_to_order,"new notififcation","blue","mdi mdi-bell") 
+        order_user = Orderuser.new
+        order_user.model_id = current_model.id
+        order_user.forder_id = params['order_id']
+        order_user.save
+      end
     end
   end
   redirect_to forder_url(params['order_id'])
@@ -20,10 +37,12 @@ end
   # GET /forders/1
   # GET /forders/1.json
   def show
-    @friends = current_model.tasks
-    @meals = @forder.meals
-    p @meals
-    p "######################################################################################################3"
+    users_in_order = Orderuser.where(:forder_id => @forder.id).pluck(:model_id) #get ids of users in order
+    friend_not_member_id = current_model.tasks.pluck(:reciver_id) - users_in_order  #remove duplications so we dont show users already member of order
+    @friends = Friend.where(reciver_id: friend_not_member_id)
+    @groups = current_model.fgroups
+    @meals_unclean = @forder.meals
+    @meals = @meals_unclean.reject { |item| item.meal.nil? || item.meal == '' }
   end
 
   def add_meal
