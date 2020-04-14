@@ -7,3 +7,52 @@
 
 <%= link_to 'Edit', edit_fgroup_path(@fgroup) %> |
 <%= link_to 'Back', fgroups_path %>
+
+
+
+<table id="example" class="table display" style="width:80%">
+<thead>
+<tr>
+  <th colspan="2">All Your Friends</th>
+</tr>
+</thead>
+        <tbody>
+        <% @friends.each do |friend| %>
+          <tr>
+          <% if friend.request_id != current_model.id %>
+          <td><%= friend.request.username %></td>
+          <td><%= link_to 'Destroy', friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+          <% if friend.reciver_id != current_model.id %>
+          <td><%= friend.reciver.username %></td>
+          <td><%= link_to 'Destroy', friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+            
+          </tr>
+        <% end %>
+           
+        </tbody>
+        <tfoot>
+        <tr>
+        <th colspan="2"></th>
+      </tr>
+        </tfoot>
+    </table>
+<br>
+<style>
+.table-fixed thead {
+  width: 97%;
+}
+.table-fixed tbody {
+  height: 230px;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
+</style>

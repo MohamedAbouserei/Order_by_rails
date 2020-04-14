@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
     !devise_controller? && "application"
     #@notifcations=current_model.notifcations
   end
+  public
+  def home
+    render 'layouts/home'
+  end
   
   # def set_details        
   #   Notifcation.savenotify(1,"text","http://localhost:3000/fgroups","new notififcation","blue","mdi mdi-bell")
