@@ -144,6 +144,9 @@ GEM
     httpclient (2.8.3)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
+    image_processing (1.10.3)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     io-like (0.3.1)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
@@ -165,6 +168,7 @@ GEM
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
     mimemagic (0.3.4)
+    mini_magick (4.10.1)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
@@ -250,6 +254,8 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    ruby-vips (2.0.17)
+      ffi (~> 1.9)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -317,6 +323,7 @@ DEPENDENCIES
   figaro
   guard (~> 2.16, >= 2.16.2)
   guard-livereload (~> 2.5, >= 2.5.2)
+  image_processing (~> 1.2)
   jbuilder (~> 2.5)
   jquery-rails
   mysql2

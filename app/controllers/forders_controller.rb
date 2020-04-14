@@ -32,10 +32,28 @@ end
   # POST /forders
   # POST /forders.json
   def create
-    @forder = Forder.new(forder_params)
+    
+    uploaded_io = params[:forder][:image]
+    if uploaded_io
+      
+      @forder = Forder.new(forder_params.merge(:model_id => current_model.id,:image => uploaded_io.original_filename))
+    else
+      uploaded_io=nil
+      @forder = Forder.new(forder_params.merge(:model_id => current_model.id))
 
+    end
+   
     respond_to do |format|
       if @forder.save
+        if uploaded_io
+        p @forder.id
+
+        path = File.join Rails.root, 'public', @forder.id.to_s
+        FileUtils.mkdir_p(path) unless File.exist?(path)     
+        File.open(Rails.root.join('public', @forder.id.to_s, uploaded_io.original_filename), 'wb') do |file|
+        file.write(uploaded_io.read)
+        end
+      end
         format.html { redirect_to @forder, notice: 'Forder was successfully created.' }
         format.json { render :show, status: :created, location: @forder }
       else
