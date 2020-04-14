@@ -201,3 +201,8 @@ h5 span {
 h5 a {
     color: #8b95a5;
 }
+
+form {
+    width: auto;
+    margin: 0;
+}

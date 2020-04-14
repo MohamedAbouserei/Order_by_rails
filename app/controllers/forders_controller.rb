@@ -5,7 +5,6 @@ class FordersController < ApplicationController
   # GET /forders.json
   def index
     @forders = current_model.forders
-    @friends = current_model.tasks
   end
 def add_friends
   p params['friends_ids']
@@ -18,6 +17,9 @@ end
   # GET /forders/1
   # GET /forders/1.json
   def show
+    @friends = current_model.tasks
+    p @friends[0].request
+    print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   end
 
   # GET /forders/new
