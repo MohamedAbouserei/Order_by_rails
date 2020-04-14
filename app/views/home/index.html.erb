@@ -1,8 +1,9 @@
+
 <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css">
 
 <p id="notice"><%= notice %></p>
 
-<h1>Friends</h1>
+<h1>Home</h1>
 <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <ul class="nav nav-list">
@@ -28,20 +29,17 @@
         <table id="example" class="table display" style="width:80%">
             <thead>
                 <tr>
-                    <th colspan="2">Friends</th>
+                    <th colspan="2">Friends Activity</th>
                 </tr>
             </thead>
             <tbody>
                 <% @friends.each do |friend| %>
                 <tr>
-                    <% if friend.request_id != current_model.id %>
-                    <td><%= friend.request.username %></td>
-                    <td><%= link_to 'Destroy', friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                    <% end %>
-                    <% if friend.reciver_id != current_model.id %>
-                    <td><%= friend.reciver.username %></td>
-                    <td><%= link_to 'Destroy', friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                    <% end %>
+                       <td><%= friend.meal %></td>
+                       <td><%= friend.id %></td>
+                       <td><%= friend.model.username %></td>
+
+                        <td></td>
 
                 </tr>
                 <% end %>
@@ -58,22 +56,16 @@
         <table id="example" class="table display" style="width:80%">
             <thead>
                 <tr>
-                    <th colspan="2">Await Action</th>
+                    <th colspan="2">Leatest Activity</th>
                 </tr>
             </thead>
             <tbody>
-                <% @friendrequest.each do |friend| %>
+                <% @userLatestActivity.each do |order| %>
                 <tr>
-                    <% if friend.request_id.to_i != current_model.id.to_i %>
-                    <td><%= friend.request.username %></td>
-                    <td><a href="/approvereq/<%=friend.id=%>">Approve Request</a></td>
+                    <td><%= order.meal %></td>
 
-                    <% end %>
-                    <% if friend.reciver_id.to_i != current_model.id.to_i %>
-                    <td><%= friend.reciver.username %></td>
                     <td></td>
 
-                    <% end %>
 
                 </tr>
                 <% end %>
