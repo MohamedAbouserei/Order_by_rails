@@ -1,44 +1,26 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @fgroup.name %>
-</p>
-
-<%= link_to 'Edit', edit_fgroup_path(@fgroup) %> |
-<%= link_to 'Back', fgroups_path %>
-
-
-
-<h1>booooooooooooooooooooooooooooooooooooooooooooooooy</h1>
-<%= render 'lefa', fgroup: @fgroup ,friends: @friends%>
-<h1>booooooooooooooooooooooooooooooooooooooooooooooooy</h1>
-
-
-<br>
-<style>
-.table-fixed thead {
-  width: 97%;
-}
-.table-fixed tbody {
-  height: 230px;
-  overflow-y: auto;
-  width: 100%;
-}
-.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
-  display: block;
-}
-.table-fixed tbody td, .table-fixed thead > tr> th {
-  float: left;
-  border-bottom-width: 0;
-}
-</style>
+<%= form_with(model: fgroup, local: true) do |form| %>
+  
+    <% @friends.each do |friend| %>
+          <tr>
+          <% if friend.request_id != current_model.id %>
+          <td><%= friend.request.username %>   <%= form.check_box :paid %></td>
+           
+          <% end %>
+          <% if friend.reciver_id != current_model.id %>
+          <td><%= friend.reciver.username %><%= form.check_box :paid %></td>
+          <% end %>
+          </tr>
+        <% end %>
+  
+  <div class="actions">
+    <%= form.submit :Invite %>
+  </div>
+<% end %>
 
 <script type="text/javascript">
 
 function notify(e) {
         event.preventDefault();
-        $("#searchbox").css("display", "none");
         var els = document.querySelectorAll('.chks input[type="checkbox"]:checked');
         for (var i = 0; i < els.length; i++) {
             var id = els[i].id;
