@@ -66,7 +66,8 @@
                                     <a class="friend-card" href="#">
                                       <img class="avatar friend-card" src="https://bootdey.com/img/Content/avatar/avatar2.png">
                                     </a>
-                                    <h5 class="mt-2 mb-0 friend-card"><a class="hover-primary" href="#"><%= friend.username %></a></h5>
+                                    <% if friend.reciver.id == current_model  %>
+                                    <h5 class="mt-2 mb-0 friend-card"><a class="hover-primary" href="#"><% friend.request.username %></a></h5>
                                     <span>Designer</span>
                                     <div class="mt-20">
                                       <span class="badge badge-default">Photoshop</span>
@@ -90,6 +91,32 @@
                                 </div>
                                 </label>
                               </div>
+                              <% else %>
+                              <h5 class="mt-2 mb-0 friend-card"><a class="hover-primary" href="#"><% friend.reciver.username %></a></h5>
+                              <span>Designer</span>
+                              <div class="mt-20">
+                                <span class="badge badge-default">Photoshop</span>
+                                <span class="badge badge-default">Illustrator</span>
+                                <span class="badge badge-default">Animation</span>
+                              </div>
+                            </div>
+
+                            <footer class="card-footer flexbox">
+                              
+                              <div>
+                                <i class="fa fa-map-marker pr-1"></i>
+                                <span>Blackwood, NJ</span>
+                              </div>
+                              <div>
+                                <i class="fa fa-money pr-1"></i>
+                                <span>$55 / hour</span>
+                              </div>
+                              
+                            </footer>
+                          </div>
+                          </label>
+                        </div>
+                              <% end %>
                             <% end %>
                           </div>
                         </div>
