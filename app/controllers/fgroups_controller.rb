@@ -1,4 +1,6 @@
 class FgroupsController < ApplicationController
+  require "groupUser.rb"
+
   before_action :authenticate_model!
   before_action :set_fgroup, only: [:show, :edit, :update, :destroy]
   # GET /fgroups
@@ -21,6 +23,19 @@ class FgroupsController < ApplicationController
   # GET /fgroups/new
   def new
     @fgroup = Fgroup.new
+    
+  end
+
+  def add 
+
+    print "===================================================="
+    puts params
+    print "Booooooooooooooooooooooooooooooooooooooooooooooooooooooooooy"
+    f = GroupUser.create(model_id:params["id"] , fgroup_id:params["group_id"])
+    #f= GroupUser.new
+
+    show
+    
   end
 
   # GET /fgroups/1/edit

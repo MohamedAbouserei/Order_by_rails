@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   devise_for :models
   get '/auth/:provider/callback' => 'sessions#omniauth'
   get 'auth/failure', to: redirect('/')
+  get '/addusertogroup',to: 'fgroups#add'
+
 
 
   

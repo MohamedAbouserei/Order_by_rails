@@ -3,11 +3,11 @@
     <% @friends.each do |friend| %>
           <tr>
           <% if friend.request_id != current_model.id %>
-          <td><%= friend.request.username %>   <%= form.check_box :paid %></td>
+          <td><%= friend.request.username %> <%= form.check_box "#{friend.request_id}",class:"#{friend.request_id}",id:"#{friend.request_id}"%></td>
            
           <% end %>
           <% if friend.reciver_id != current_model.id %>
-          <td><%= friend.reciver.username %><%= form.check_box :paid %></td>
+          <td><%= friend.reciver.username %><%= form.check_box "#{friend.reciver_id}",class:"#{friend.reciver_id}",id:"#{friend.reciver_id}" %></td>
           <% end %>
           </tr>
         <% end %>
@@ -18,10 +18,15 @@
 <% end %>
 
 <script type="text/javascript">
-
+var s = document.querySelectorAll("input[type=submit]")[0];
+s.addEventListener("click",notify);
 function notify(e) {
         event.preventDefault();
-        var els = document.querySelectorAll('.chks input[type="checkbox"]:checked');
+        console.log("testttttttttttttttttttttttttttttttttttttttttttt");
+        
+        var els = document.querySelectorAll('input[type="checkbox"]:checked');
+        console.log("length = ",els.length);
+        
         for (var i = 0; i < els.length; i++) {
             var id = els[i].id;
             console.log(id)
@@ -29,11 +34,12 @@ function notify(e) {
             $.ajax({
                 async: false,
                 cache: false,
-                url: "/addrequest",
+                url: "/addusertogroup",
                 type: 'GET',
                 data: {
                     uniq_param: (new Date()).getTime(),
-                    id: id
+                    id: id , 
+                    group_id: <%= @fgroup.id%>
                 },
                 success: function(data) {
                     console.log("sent to ", id);
