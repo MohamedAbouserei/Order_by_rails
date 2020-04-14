@@ -158,7 +158,7 @@
         for (var i = 0; i < els.length; i++) {
             var id = els[i].id;
             console.log(id)
-
+            els[i].checked = false;
             $.ajax({
                 async: false,
                 cache: false,
