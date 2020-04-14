@@ -18,6 +18,8 @@ end
   # GET /forders/1
   # GET /forders/1.json
   def show
+    @friends = current_model.tasks
+
   end
 
   # GET /forders/new
