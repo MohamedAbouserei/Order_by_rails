@@ -21,7 +21,7 @@ def add_friends
   if params['group_ids']
     users_in_order = Orderuser.where(:forder_id => params['order_id']).pluck(:model_id) #get ids of users in order
     for group in params['group_ids'] do
-      group_users = Fgroup.find(group).groupUsers.pluck(:model_id)- users_in_order
+      group_users = Fgroup.find(group).groupusers.pluck(:model_id)- users_in_order
       for user in group_users do
         Notifcation.savenotify(user,current_model.username+" wants to add you to an order",url_to_order,"new notififcation","blue","mdi mdi-bell") 
         order_user = Orderuser.new

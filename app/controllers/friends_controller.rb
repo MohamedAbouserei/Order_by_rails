@@ -8,6 +8,7 @@ class FriendsController < ApplicationController
   def index 
     @friendrequest=Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action == false }
     @friends = Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action }
+    
   end
 
   # GET /friends/1
@@ -20,7 +21,7 @@ class FriendsController < ApplicationController
     friend = Friend.new
     friend.request_id=current_model.id
     friend.reciver_id=params[:id]
-    body=current_model.username+" has  sent you a freind request "
+    body=Model.find(params[:id]).username+" has  sent you a freind request "
     Notifcation.savenotify(params[:id].to_i,body,"http://localhost:3000/friends","new friend reqeust","red","mdi mdi-bell")
     
     friend.save
