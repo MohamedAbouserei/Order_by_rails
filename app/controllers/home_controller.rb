@@ -15,10 +15,13 @@ class HomeController < ApplicationController
             @friendsActivity += allOrders.select{ |order| order.model_id != current_model.id}
         end
         
-        @friendsActivity = @friendsActivity.uniq.shuffle
-        @friendsActivity = @friendsActivity.paginate(page: params[:page], per_page: 2)
+        @friendsActivity = @friendsActivity.uniq
+        @friendsActivity = @friendsActivity.paginate(page: params[:page], per_page: 5)
         
 
     end
+
+
+    
     
 end

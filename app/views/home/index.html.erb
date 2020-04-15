@@ -1,27 +1,27 @@
 <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css">
 
 <p id="notice"><%= notice %></p>
-<%= will_paginate @friendsActivity %>
-<h1>Home</h1>
-<div class="row" style="margin-left: 50px;">
+<h1 align="center">Home</h1>
+<hr>
+<hr>
+<div class="row" style="margin: auto;margin-left: 9%;">
     <div class="col-sm-6">
         <table id="example" class="table display" style="width:80%">
             <thead>
                 <tr>
-                    <th colspan="2">Friends Activity</th>
+                    <th colspan="2" style="font-size: 130%;justify-content: center; display: flex; align-items: center;">Friends Activity</th>
                 </tr>
             </thead>
             <tbody>
-                <% @friendsActivity.each do |friend| %>
+                <% @friendsActivity.each do |order| %>
                 <tr>
-                    <td><%= friend.meal %></td>
-                    <td><%= friend.id %></td>
-                    <td><%= friend.model.username %></td>
-
-                    <td></td>
+                    <td style="font-size: 115%; height: 70px; align-items: center;display: flex;"> <span> <%= order.model.username %></span> has ordered <span> <%= link_to order.meal, order %> </span> from <span> <%= order.resturant %> </span> Resturant </td>
 
                 </tr>
                 <% end %>
+                <tr style="justify-content: center; display: flex; align-items: center;">
+                    <td colspan="2" style="font-size: 100%"> <%= will_paginate @friendsActivity %></td>
+                </tr>
             </tbody>
             <tfoot>
                 <tr>
@@ -34,20 +34,20 @@
         <table id="example" class="table display" style="width:80%">
             <thead>
                 <tr>
-                    <th colspan="2">Leatest Activity</th>
+                    <th colspan="2" style="font-size: 130%;justify-content: center; display: flex; align-items: center;">Leatest Activity</th>
                 </tr>
             </thead>
             <tbody>
                 <% @userLatestActivity.each do |order| %>
                 <tr>
-                    <td><%= order.meal %></td>
-
-                    <td></td>
-
+                    <td style="font-size: 115%; height: 70px;line-height: 23px;
+    overflow: hidden;"> You have ordered <span> <%= link_to order.meal, order %></span> from <span> <%= order.resturant %></span> Resturant at <span> <%= order.updated_at %></span></td>
 
                 </tr>
                 <% end %>
-
+                <tr style="justify-content: center; display: flex; align-items: center;">
+                    <td colspan="2" class="newOrder" style="font-size: 100%; color: #F1BE60"> <%= link_to 'New Order', new_forder_path %></td>
+                </tr>
             </tbody>
             <tfoot>
                 <tr>
@@ -59,6 +59,34 @@
 </div>
 <br>
 <style>
+    span a {
+        color: #F1BE60 !important
+    }
+
+    span {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .previous_page {
+        padding-right: 20px;
+    }
+
+    .next_page {
+        padding-left: 20px;
+    }
+
+
+    .pagination em, .newOrder a {
+        color: #F1BE60
+    }
+
+    .pagination a,
+    em {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
     .table-fixed thead {
         width: 97%;
     }
