@@ -6,7 +6,7 @@
 <hr>
 <div class="row" style="margin: auto;margin-left: 9%;">
     <div class="col-sm-6">
-        <table id="example" class="table display" style="width:80%">
+        <table id="example" class="table display" style="width:80%;height: 500px;">
             <thead>
                 <tr>
                     <th colspan="2" style="font-size: 130%;justify-content: center; display: flex; align-items: center;">Friends Activity</th>
@@ -19,19 +19,17 @@
 
                 </tr>
                 <% end %>
-                <tr style="justify-content: center; display: flex; align-items: center;">
-                    <td colspan="2" style="font-size: 100%"> <%= will_paginate @friendsActivity %></td>
-                </tr>
+                
             </tbody>
             <tfoot>
-                <tr>
-                    <th colspan="2"></th>
+                <tr style="justify-content: center; display: flex; align-items: center;">
+                    <td colspan="2" style="font-size: 100%"> <%= will_paginate @friendsActivity %></td>
                 </tr>
             </tfoot>
         </table>
     </div>
     <div class="col-sm-6">
-        <table id="example" class="table display" style="width:80%">
+        <table id="example" class="table display" style="width:80%;height: 500px;">
             <thead>
                 <tr>
                     <th colspan="2" style="font-size: 130%;justify-content: center; display: flex; align-items: center;">Leatest Activity</th>
@@ -45,13 +43,13 @@
 
                 </tr>
                 <% end %>
-                <tr style="justify-content: center; display: flex; align-items: center;">
-                    <td colspan="2" class="newOrder" style="font-size: 100%; color: #F1BE60"> <%= link_to 'New Order', new_forder_path %></td>
-                </tr>
+                
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="2"></th>
+                   <tr style="justify-content: center; display: flex; align-items: center;">
+                    <td colspan="2" class="newOrder" style="font-size: 100%; color: #F1BE60"> <%= link_to 'New Order', new_forder_path %></td>
+                </tr>
                 </tr>
             </tfoot>
         </table>
