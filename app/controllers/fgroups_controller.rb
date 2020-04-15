@@ -31,8 +31,8 @@ class FgroupsController < ApplicationController
     print "===================================================="
     puts params
     print "Booooooooooooooooooooooooooooooooooooooooooooooooooooooooooy"
-    f = GroupUser.create(model_id:params["id"] , fgroup_id:params["group_id"])
-    #f= GroupUser.new
+    f = Groupuser.create(model_id:params["id"] , fgroup_id:params["group_id"])
+    # f= Groupuser.new
 
     show
     
