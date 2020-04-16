@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>groups</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fgroups.each do |fgroup| %>
+      <tr>
+        <td><%= fgroup.name %></td>
+        <td><%= link_to 'Show', fgroup ,method: :get %></td>
+        <% if fgroup.model_id == current_model.id %>
+        <td><%= link_to 'Edit', edit_fgroup_path(fgroup) %></td>
+        <td><%= link_to 'Destroy', fgroup, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fgroup', new_fgroup_path,method: "get" %>

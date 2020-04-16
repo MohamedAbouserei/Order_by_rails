@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @fgroup.name %>
+</p>
+
+<%= link_to 'Edit', edit_fgroup_path(@fgroup) %> |
+<%= link_to 'Back', fgroups_path %>
+<%= render 'invite', fgroup: @fgroup ,friends: @friends , friendsActivity: @friendsActivity%>
+
+

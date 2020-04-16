@@ -1,0 +1,190 @@
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css">
+
+<p id="notice"><%= notice %></p>
+
+<h1>Friends</h1>
+<div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <ul class="nav nav-list">
+        <form id="suggestion_form">
+
+            <li>
+
+                <input id="suggestion" name="suggestion" type="text" class="form-control search-query span10" placeholder="Find Friends" aria-label="Username" aria-describedby="basic-addon1" autocomplete="off">
+            </li>
+            <ul class="list-group chks" style="background-color: white; position: absolute;
+                                    width: 18em; z-index: 100;" id="searchbox">
+
+            </ul>
+            <div style="float:right">
+                <button onclick="notify()" class="btn btn-primary py-3 px-5"> send request </button>
+            </div>
+            <small id="emailHelp" class="form-text text-muted">We'\''ll never share your email with anyone else.</small>
+
+
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <table id="example" class="table display" style="width:80%">
+            <thead>
+                <tr>
+                    <th colspan="2">Friends</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @friends.each do |friend| %>
+                <tr>
+                    <% if friend.request_id != current_model.id %>
+                    <td><%= friend.request.username %></td>
+                    <td><%= link_to 'Destroy', friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    <% end %>
+                    <% if friend.reciver_id != current_model.id %>
+                    <td><%= friend.reciver.username %></td>
+                    <td><%= link_to 'Destroy', friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    <% end %>
+
+                </tr>
+                <% end %>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2"></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="col-sm-6">
+        <table id="example" class="table display" style="width:80%">
+            <thead>
+                <tr>
+                    <th colspan="2">Await Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @friendrequest.each do |friend| %>
+                <tr>
+                    <% if friend.request_id.to_i != current_model.id.to_i %>
+                    <td><%= friend.request.username %></td>
+                    <td><a href="/approvereq/<%=friend.id=%>">Approve Request</a></td>
+
+                    <% end %>
+                    <% if friend.reciver_id.to_i != current_model.id.to_i %>
+                    <td><%= friend.reciver.username %></td>
+                    <td></td>
+
+                    <% end %>
+
+                </tr>
+                <% end %>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2"></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<br>
+<style>
+    .table-fixed thead {
+        width: 97%;
+    }
+
+    .table-fixed tbody {
+        height: 230px;
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    .table-fixed thead,
+    .table-fixed tbody,
+    .table-fixed tr,
+    .table-fixed td,
+    .table-fixed th {
+        display: block;
+    }
+
+    .table-fixed tbody td,
+    .table-fixed thead>tr>th {
+        float: left;
+        border-bottom-width: 0;
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#suggestion_form').keyup(function() {
+            $form = $(this)
+            var formData = new FormData(this);
+            var username = document.getElementById('suggestion').value
+            var query = $(this).val();
+            $.ajax({
+                url: "/search",
+                type: 'GET',
+                data: {
+                    username: username
+                },
+
+                success: function(data) {
+                    console.log(JSON.parse(data["message"]));
+                    data["message"] = JSON.parse(data["message"])
+                    $("#searchbox").css("display", "block");
+                    $("#searchbox").empty()
+                    for (i in data["message"]) {
+                        $('#searchbox').append('<li class="list-group-item" ><div style="float:left">' + data[
+                            "message"][i].username + '</div><div style="float:right"> <input id="' + data["message"][i].id + '" type="checkbox"></div><br></li>');
+                        $('#' + i + '').click();
+                    }
+                },
+                failure: function(data) {
+                    console.log("FAIL");
+                    console.log(data);
+                }
+            });
+        });
+    });
+
+    function notify(e) {
+        event.preventDefault();
+        $("#searchbox").css("display", "none");
+        var els = document.querySelectorAll('.chks input[type="checkbox"]:checked');
+        for (var i = 0; i < els.length; i++) {
+            var id = els[i].id;
+            console.log(id)
+            els[i].checked = false;
+            $.ajax({
+                async: false,
+                cache: false,
+                url: "/addrequest",
+                type: 'GET',
+                data: {
+                    uniq_param: (new Date()).getTime(),
+                    id: id
+                },
+                success: function(data) {
+                    console.log("sent to ", id);
+
+                },
+                failure: function(data) {
+                    console.log("FAIL");
+                    console.log(data);
+                }
+            });
+
+        }
+    }
+    $(document).click(function() {
+        $("#searchbox").css("display", "none");
+
+    });
+    $("#searchbox").click(function(e) {
+        e.stopPropagation();
+    })
+</script>

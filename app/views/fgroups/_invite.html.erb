@@ -1,0 +1,55 @@
+<%= form_with(model: fgroup, local: true) do |form| %>
+  
+    <div id="kryesore" style="overflow-y: scroll;height:250px;">
+    <% @friendsActivity.each do |friend| %>
+          <% if friend.request_id != current_model.id %>
+          <h4><%= friend.request.username %> <%= form.check_box "#{friend.request_id}",class:"#{friend.request_id}",id:"#{friend.request_id}"%></h4> 
+           <br>
+          <% end %>
+          <% if friend.reciver_id != current_model.id %>
+          <h4><%= friend.reciver.username %> <%= form.check_box "#{friend.reciver_id}",class:"#{friend.reciver_id}",id:"#{friend.reciver_id}" %></h4>
+          <br>
+          <% end %>
+        <% end %>
+    </div>
+  
+  <div class="actions">
+    <%= form.submit :Invite %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+var s = document.querySelectorAll("input[type=submit]")[0];
+s.addEventListener("click",notify);
+function notify(e) {
+        event.preventDefault();
+        var els = document.querySelectorAll('input[type="checkbox"]:checked');        
+        for (var i = 0; i < els.length; i++) {
+            var id = els[i].id;
+            console.log(id)
+            els[i].checked = false;
+            $.ajax({
+                async: false,
+                cache: false,
+                url: "/addusertogroup",
+                type: 'GET',
+                data: {
+                    uniq_param: (new Date()).getTime(),
+                    id: id , 
+                    group_id: <%= @fgroup.id%>
+                },
+                success: function(data) {
+                    console.log("sent to ", id);
+
+                },
+                failure: function(data) {
+                    console.log("FAIL");
+                    console.log(data);
+                }
+            });
+
+        }
+    }
+
+    </script>
+

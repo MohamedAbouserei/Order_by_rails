@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+<h1>Forders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Meal</th>
+      <th>Resturant</th>
+      <th>Image</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @forders.each do |forder| %>
+      <tr>
+        <td><%= forder.meal %></td>
+        <td><%= forder.resturant %></td>
+        <td><%= forder.image %></td>
+        <td><%= link_to 'Show', forder %></td>
+        <td><%= link_to 'Destroy', forder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Forder', new_forder_path %>

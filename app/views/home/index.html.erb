@@ -1,0 +1,186 @@
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css">
+
+<p id="notice"><%= notice %></p>
+<h1 align="center">Home</h1>
+<hr>
+<hr>
+<div class="row" style="margin: auto;margin-left: 9%;">
+    <div class="col-sm-6">
+        <table id="example" class="table display" style="width:80%;height: 500px;">
+            <thead>
+                <tr>
+                    <th colspan="2" style="font-size: 130%;justify-content: center; display: flex; align-items: center;">Friends Activity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @friendsActivity.each do |order| %>
+                <tr>
+                    <td style="font-size: 115%; height: 70px; align-items: center;display: flex;"> <span> <%= order.model.username %></span> has ordered <span> <%= link_to order.meal, order %> </span> from <span> <%= order.resturant %> </span> Resturant </td>
+
+                </tr>
+                <% end %>
+                
+            </tbody>
+            <tfoot>
+                <tr style="justify-content: center; display: flex; align-items: center;">
+                    <td colspan="2" style="font-size: 100%"> <%= will_paginate @friendsActivity %></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="col-sm-6">
+        <table id="example" class="table display" style="width:80%;height: 500px;">
+            <thead>
+                <tr>
+                    <th colspan="2" style="font-size: 130%;justify-content: center; display: flex; align-items: center;">Leatest Activity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @userLatestActivity.each do |order| %>
+                <tr>
+                    <td style="font-size: 115%; height: 70px;line-height: 23px;
+    overflow: hidden;"> You have ordered <span> <%= link_to order.meal, order %></span> from <span> <%= order.resturant %></span> Resturant at <span> <%= order.updated_at %></span></td>
+
+                </tr>
+                <% end %>
+                
+            </tbody>
+            <tfoot>
+                <tr>
+                   <tr style="justify-content: center; display: flex; align-items: center;">
+                    <td colspan="2" class="newOrder" style="font-size: 100%; color: #F1BE60"> <%= link_to 'New Order', new_forder_path %></td>
+                </tr>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<br>
+<style>
+    span a {
+        color: #F1BE60 !important
+    }
+
+    span {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .previous_page {
+        padding-right: 20px;
+    }
+
+    .next_page {
+        padding-left: 20px;
+    }
+
+
+    .pagination em, .newOrder a {
+        color: #F1BE60
+    }
+
+    .pagination a,
+    em {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    .table-fixed thead {
+        width: 97%;
+    }
+
+    .table-fixed tbody {
+        height: 230px;
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    .table-fixed thead,
+    .table-fixed tbody,
+    .table-fixed tr,
+    .table-fixed td,
+    .table-fixed th {
+        display: block;
+    }
+
+    .table-fixed tbody td,
+    .table-fixed thead>tr>th {
+        float: left;
+        border-bottom-width: 0;
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#suggestion_form').keyup(function() {
+            $form = $(this)
+            var formData = new FormData(this);
+            var username = document.getElementById('suggestion').value
+            var query = $(this).val();
+            $.ajax({
+                url: "/search",
+                type: 'GET',
+                data: {
+                    username: username
+                },
+
+                success: function(data) {
+                    console.log(JSON.parse(data["message"]));
+                    data["message"] = JSON.parse(data["message"])
+                    $("#searchbox").css("display", "block");
+                    $("#searchbox").empty()
+                    for (i in data["message"]) {
+                        $('#searchbox').append('<li class="list-group-item" ><div style="float:left">' + data[
+                            "message"][i].username + '</div><div style="float:right"> <input id="' + data["message"][i].id + '" type="checkbox"></div><br></li>');
+                        $('#' + i + '').click();
+                    }
+                },
+                failure: function(data) {
+                    console.log("FAIL");
+                    console.log(data);
+                }
+            });
+        });
+    });
+
+    function notify(e) {
+        event.preventDefault();
+        $("#searchbox").css("display", "none");
+        var els = document.querySelectorAll('.chks input[type="checkbox"]:checked');
+        for (var i = 0; i < els.length; i++) {
+            var id = els[i].id;
+            console.log(id)
+
+            $.ajax({
+                async: false,
+                cache: false,
+                url: "/addrequest",
+                type: 'GET',
+                data: {
+                    uniq_param: (new Date()).getTime(),
+                    id: id
+                },
+                success: function(data) {
+                    console.log("sent to ", id);
+
+                },
+                failure: function(data) {
+                    console.log("FAIL");
+                    console.log(data);
+                }
+            });
+
+        }
+    }
+    $(document).click(function() {
+        $("#searchbox").css("display", "none");
+
+    });
+    $("#searchbox").click(function(e) {
+        e.stopPropagation();
+    })
+</script>

@@ -1,0 +1,9 @@
+<% if model_signed_in? %>
+  <li>
+  <%= link_to('Edit registration', edit_model_registration_path ,method: :get) %>
+  </li>
+<% else %>
+  <li>
+  <%= link_to('Register', new_model_registration_path ,method: :get) %>
+  </li>
+<% end %>
