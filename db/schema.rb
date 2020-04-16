@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_14_164329) do
+ActiveRecord::Schema.define(version: 2020_04_16_163425) do
 
   create_table "fgroups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2020_04_14_164329) do
     t.string "username"
     t.index ["email"], name: "index_models_on_email", unique: true
     t.index ["reset_password_token"], name: "index_models_on_reset_password_token", unique: true
-    t.index ["username"], name: "index_models_on_username", unique: true
+    t.index ["username"], name: "index_models_on_username"
   end
 
   create_table "notifcations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
