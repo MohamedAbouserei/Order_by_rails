@@ -1,7 +1,7 @@
 <%= form_with(model: fgroup, local: true) do |form| %>
   
     <div id="kryesore" style="overflow-y: scroll;height:250px;">
-    <% @friends.each do |friend| %>
+    <% @friendsActivity.each do |friend| %>
           <% if friend.request_id != current_model.id %>
           <h4><%= friend.request.username %> <%= form.check_box "#{friend.request_id}",class:"#{friend.request_id}",id:"#{friend.request_id}"%></h4> 
            <br>
