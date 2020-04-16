@@ -1,5 +1,5 @@
 class FgroupsController < ApplicationController
-  require "groupUser.rb"
+  # require "groupUser.rb"
 
   before_action :authenticate_model!
   before_action :set_fgroup, only: [:show, :edit, :update, :destroy]
@@ -11,13 +11,34 @@ class FgroupsController < ApplicationController
 
   # GET /fgroups/1
   # GET /fgroups/1.json
-  def show
+  def show()
+    
+
     @friends = Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action }
     @fgroups = Fgroup.all
-    # @groupuser=GroupUser.find(params[:id])
-    # @groupUser.model_id=params[:id]
-    # @groupUser.fgroup_id=fgroups.id
-    # @groupUser.save
+    lefaBoooy = Groupuser.all
+    p "booooooooooooooooooooooooofmjosngjkfngjnjnf"
+    p lefaBoooy
+    p "booooooooooooooooooooooooofmjosngjkfngjnjnf"
+
+
+    hisfriends = Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action }
+    @friendsActivity = [] 
+    
+    if lefaBoooy.length() > 0      
+      lefaBoooy.each do |model|
+        @friendsActivity += hisfriends.select{ |boy| model.model_id != boy.reciver_id and model.model_id != boy.request_id and model.model_id != current_model.id  }
+      
+      end
+    else
+      # @friendsActivity = hisfriends
+    end
+    
+    @friendsActivity = @friendsActivity.uniq
+    p "kfdmgkldfmglkdfmgkldf,mgkldfmgdfkl,gmdflk,g"
+    p @friendsActivity
+    p "kfdmgkldfmglkdfmgkldf,mgkldfmgdfkl,gmdflk,g"
+    
   end
 
   # GET /fgroups/new
@@ -34,7 +55,7 @@ class FgroupsController < ApplicationController
     f = Groupuser.create(model_id:params["id"] , fgroup_id:params["group_id"])
     # f= Groupuser.new
 
-    show
+    show 
     
   end
 
