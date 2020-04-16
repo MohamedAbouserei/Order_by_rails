@@ -1,4 +1,4 @@
-class GroupsUsers < ActiveRecord::Migration[5.2]
+class Groupsusers < ActiveRecord::Migration[5.2]
   def change
     add_reference :fgroups, :model, index: true
     add_foreign_key :fgroups, :models

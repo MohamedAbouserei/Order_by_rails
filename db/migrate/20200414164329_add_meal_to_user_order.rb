@@ -1,4 +1,4 @@
-class AddMealToUserOrder < ActiveRecord::Migration[5.2]
+class AddMealToUserOrder < ActiveRecord::Migration[6.0]
   def change
     add_column :orderusers, :meal, :string
   end
