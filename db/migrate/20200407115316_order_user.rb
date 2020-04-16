@@ -1,4 +1,4 @@
-class Orderuser < ActiveRecord::Migration[5.2]
+class OrderUser < ActiveRecord::Migration[5.2]
   def change
     create_table :orderusers do |t|
       t.timestamps
