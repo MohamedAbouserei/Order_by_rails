@@ -1,5 +1,5 @@
 class FgroupsController < ApplicationController
-  # require "groupUser.rb"
+   require "groupUser.rb"
 
   before_action :authenticate_model!
   before_action :set_fgroup, only: [:show, :edit, :update, :destroy]
@@ -12,34 +12,47 @@ class FgroupsController < ApplicationController
   # GET /fgroups/1
   # GET /fgroups/1.json
   def show()
-    
-
+  
     @friends = Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action }
     @fgroups = Fgroup.all
     lefaBoooy = Groupuser.all
     p "booooooooooooooooooooooooofmjosngjkfngjnjnf"
     p lefaBoooy
     p "booooooooooooooooooooooooofmjosngjkfngjnjnf"
-
-
-    hisfriends = Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action }
-    @friendsActivity = [] 
     
-    if lefaBoooy.length() > 0      
-      lefaBoooy.each do |model|
-        @friendsActivity += hisfriends.select{ |boy| model.model_id != boy.reciver_id and model.model_id != boy.request_id and model.model_id != current_model.id  }
+    hisfriends = Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action }
+    # @friendsActivity = [] 
+    
+    # if lefaBoooy.length() > 0      
+    #   lefaBoooy.each do |model|
+    #     @friendsActivity += hisfriends.select{ |boy| model.model_id != boy.reciver_id and model.model_id != boy.request_id and model.model_id != current_model.id  }
       
+    #   end
+    # else
+    #   # @friendsActivity = hisfriends
+    # end
+    @friendsActivity = [] 
+    flag = []
+    if lefaBoooy.length() > 0      
+      hisfriends.each do |model|
+        flag = []
+        flag = lefaBoooy.select{ |boy| boy.model_id == model.reciver_id or boy.model_id == model.request_id }
+        if flag.length() == 0 
+          @friendsActivity.push model
+        end
       end
     else
-      # @friendsActivity = hisfriends
+      @friendsActivity = hisfriends
     end
-    
+
     @friendsActivity = @friendsActivity.uniq
     p "kfdmgkldfmglkdfmgkldf,mgkldfmgdfkl,gmdflk,g"
     p @friendsActivity
     p "kfdmgkldfmglkdfmgkldf,mgkldfmgdfkl,gmdflk,g"
     
   end
+
+  
 
   # GET /fgroups/new
   def new
