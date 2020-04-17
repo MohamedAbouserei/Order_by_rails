@@ -71,24 +71,22 @@
                                                 </a>
 
                                                 <h5 class="mt-2 mb-0 friend-card"><a class="hover-primary" href="#"><%= friend.request.username %></a></h5>
-                                                <span>Designer</span>
+                                                <span>Friend</span>
                                                 <div class="mt-20">
-                                                    <span class="badge badge-default">Photoshop</span>
-                                                    <span class="badge badge-default">Illustrator</span>
-                                                    <span class="badge badge-default">Animation</span>
+                                                    <span class="badge badge-default">Click to choose</span>
                                                 </div>
                                             </div>
 
                                             <footer class="card-footer flexbox">
 
-                                                <div>
-                                                    <i class="fa fa-map-marker pr-1"></i>
-                                                    <span>Blackwood, NJ</span>
-                                                </div>
-                                                <div>
-                                                    <i class="fa fa-money pr-1"></i>
-                                                    <span>$55 / hour</span>
-                                                </div>
+                                        <div>
+                                            <i class="fa fa-map-marker pr-1"></i>
+                                            <span>Joined at:</span>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-money pr-1"></i>
+                                            <span><%= friend.request.created_at %></span>
+                                        </div>
 
                                             </footer>
                                         </div>
@@ -103,23 +101,20 @@
                                             <img class="avatar friend-card" src="https://bootdey.com/img/Content/avatar/avatar2.png">
                                         </a>
                                         <h5 class="mt-2 mb-0 friend-card"><a class="hover-primary" href="#"><%= friend.reciver.username %></a></h5>
-                                        <span>Designer</span>
+                                        <span>Friend</span>
                                         <div class="mt-20">
-                                            <span class="badge badge-default">Photoshop</span>
-                                            <span class="badge badge-default">Illustrator</span>
-                                            <span class="badge badge-default">Animation</span>
+                                            <span class="badge badge-default">Click to choose</span>
                                         </div>
                                     </div>
 
                                     <footer class="card-footer flexbox">
-
                                         <div>
                                             <i class="fa fa-map-marker pr-1"></i>
-                                            <span>Blackwood, NJ</span>
+                                            <span>Joined at:</span>
                                         </div>
                                         <div>
                                             <i class="fa fa-money pr-1"></i>
-                                            <span>$55 / hour</span>
+                                            <span><%= friend.reciver.created_at %></span>
                                         </div>
 
                                     </footer>
