@@ -2,10 +2,11 @@
 <html>
 
 <head>
-    <title>Order</title>
+    <title>Otlobly</title>
+    <link rel="icon" href="https://image.flaticon.com/icons/svg/1161/1161623.svg">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="/css/tables.css">
@@ -18,7 +19,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><span class="flaticon-pizza-1 mr-1"></span>Pizza<br><small>Delicous</small></a>
+            <a class="navbar-brand" href="/"><span class="flaticon-pizza-1 mr-1"></span>ITI<br><small>Otlobly</small></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
@@ -103,19 +104,9 @@
                             <% end %>
                         </div>
                     </li>
-
-
-
-
-
-
-
-
-                </ul>
-                <ul class="hmenu">
-                    <%= render 'devise/menu/registration_items' %>
-                    <%= render 'devise/menu/login_items' %>
-
+               
+                    <li class="nav-item"><a href="/models/edit" class="nav-link">Edit Profile</a></li>
+                    <li class="nav-item"><a href="/models/sign_out" class="nav-link">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -132,7 +123,7 @@
                 <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">About Us</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <p>Otlobly is a website where you can organize big orders with friends and coworkers easily</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -140,41 +131,36 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-5 mb-md-5">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Recent Blog</h2>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img mr-4" style="/images/image_1.jpg"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img mr-4" style="/images/image_2.jpg"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="col-lg-2 col-md-6 mb-5 mb-md-5">
                     <div class="ftco-footer-widget mb-4 ml-md-4">
                         <h2 class="ftco-heading-2">Services</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">Cooked</a></li>
-                            <li><a href="#" class="py-2 d-block">Deliver</a></li>
-                            <li><a href="#" class="py-2 d-block">Quality Foods</a></li>
-                            <li><a href="#" class="py-2 d-block">Mixed</a></li>
+                            <li><a href="/" class="py-2 d-block">Home</a></li>
+                            <li><a href="/forders" class="py-2 d-block">Orders</a></li>
+                            <li><a href="/friends" class="py-2 d-block">Friends</a></li>
+                            <li><a href="/fgroups" class="py-2 d-block">Groups</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-5">
+                    <div class="ftco-footer-widget mb-4 ml-md-4">
+                        <h2 class="ftco-heading-2">Who are we</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="https://github.com/MohamedAbouserei" class="py-2 d-block">Mohamed Abo-serei</a></li>
+                            <li><a href="https://github.com/eslamkarim" class="py-2 d-block">Eslam Karim</a></li>
+                            <li><a href="https://github.com/kareemelkasaby1" class="py-2 d-block">Karim El-Kasaby</a></li>
+                            <li><a href="https://github.com/MohamedAtef11" class="py-2 d-block">Mohamed Atef</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-5">
+                    <div class="ftco-footer-widget mb-4 ml-md-4">
+                        <h2 class="ftco-heading-2">OpenSource</h2>
+                        <ul class="list-unstyled">
+                           <a href="https://github.com/MohamedAbouserei/Order_by_rails"><i id="social-fb" class="fa fa-github-square fa-3x social"></i></a>
                         </ul>
                     </div>
                 </div>
@@ -187,7 +173,7 @@
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;<script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </script> All rights reserved | This website is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">ITI students</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
