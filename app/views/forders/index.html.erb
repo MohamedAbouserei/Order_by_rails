@@ -1,29 +1,47 @@
 <p id="notice"><%= notice %></p>
-<h1>Forders</h1>
+<h1>Orders</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Meal</th>
-      <th>Resturant</th>
-      <th>Image</th>
-      <th colspan="3"></th>
+      <th scope="col"><div class="d-flex flex-row align-items-center pb-2">#</div></th>
+      <th scope="col">
+        <div class="d-flex flex-row align-items-center">
+          <div class="mr-3">Meal</div>
+        </div>
+      </th>
+      <th scope="col">
+        <div class="d-flex flex-row align-items-center">
+          <div class="mr-3">Resturant</div>
+        </div>
+      </th>
+      <th scope="col">
+        <div class="d-flex flex-row align-items-center">
+          <div class="mr-3">Image</div>
+        </div>
+      </th>
+      <th scope="col">
+        <div class="d-flex flex-row align-items-center">
+          <div class="mr-3">Action</div>
+        </div>
+      </th>
     </tr>
   </thead>
-
   <tbody>
-    <% @forders.each do |forder| %>
-      <tr>
-        <td><%= forder.meal %></td>
-        <td><%= forder.resturant %></td>
-        <td><%= forder.image %></td>
-        <td><%= link_to 'Show', forder %></td>
-        <td><%= link_to 'Destroy', forder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <% @forders.each.with_index do |forder, index| %>
+    <tr>
+      <th scope="row"><%= index+1 %></th>
+      <td><%= forder.meal %></td>
+      <td><%= forder.resturant %></td>
+      <td><%= forder.image %></td>
+      <td class="d-flex">
+          <%= link_to 'Show', forder , class: "btn btn-warning", style: "color: black; margin-right: 10px;"%>
+          <%= link_to 'Destroy', forder, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: "color: black" %></
+      </td>
+    </tr>
     <% end %>
+    
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Forder', new_forder_path %>
+<%= link_to 'New Forder', new_forder_path , class: "btn btn-primary"%>

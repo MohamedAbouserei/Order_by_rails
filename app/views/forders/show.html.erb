@@ -1,34 +1,28 @@
 <link rel="stylesheet" href="/order-friends.css">
 
-
+<div>
+    <h1><%= @forder.resturant %> Resturant</h1>
+</div>
 <div class="card-container">
-    <div class="card-content">
         <div class="card-header">
             <% if @forder.image %>
-            <div class="card-image">
-
-                <img src="/<%= @forder.id.to_s+"/"+@forder.image %>" alt="image" height="200px" width="325px">
+            <h1>Menu</h1>
+            <div class="card-image-top">
+                <img src="/<%= @forder.id.to_s+"/"+@forder.image %>" alt="image">
 
             </div>
             <% end %>
-            <div class="card-text">
-                <h1><%= @forder.resturant %></h1>
-
-            </div>
+            
         </div>
-        <div class="card-text">
-            <p>
-                <strong>Meal:</strong>
-                <%= @forder.meal %></br>
+        <div class="card-body">
+            <h5 class="card-title">Orders</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><div class="col-6 float-left">Meal: <%= @forder.meal %></div> <div class="col-6 float-right">Ordered By: <%= @forder.model.username %> </div></li>
                 <% @meals.each do |meal| %>
-                <tr>
-                    <td><%= meal.meal %></td>
-                    <td> By: <%= meal.model.username %></td>
-                </tr></br>
+                    <li class="list-group-item"><div class="col-6 float-left">Meal: <%= meal.meal %></div> <div class="col-6 float-right">Ordered By: <%= meal.model.username %> </div></li>
                 <% end %>
-            </p>
+            </ul>
         </div>
-    </div>
 </div>
 <% if current_model.id == @forder.model_id%>
 <!-- Button trigger modal -->
@@ -213,8 +207,8 @@
         --background-color: transparent;
         --font-color: #efefef;
         --font-link-color: #efefef;
-        --card-width: 400px;
-        --card-height: 400px;
+        --card-width: 800px;
+        --card-height: 800px;
     }
 
     .card-container {
@@ -224,8 +218,8 @@
         border-radius: 5px;
         margin: 8rem auto;
         padding: 4px;
-        max-width: var(--card-width, 400px);
-        height: var(--card-height, 400px);
+        max-width: var(--card-width, 800px);
+        height: var(--card-height, 800px);
 
         &:hover {
             box-shadow: 0 10px 35px rgba(0, 0, 0, 0.80), 0 10px 10px rgba(0, 0, 0, 0.50);
@@ -270,19 +264,19 @@
     @media only screen and (max-width: 640px) {
 
         :root {
-            --card-img-width: 280px;
-            --card-width: 300px;
-            --card-height: 350px;
+            --card-img-width: 600px;
+            --card-width: 800px;
+            --card-height: 750px;
         }
 
         .card-container {
-            width: var(--card-width, 280px);
-            height: var(--card-height, 300px);
+            width: var(--card-width, 680px);
+            height: var(--card-height, 500px);
         }
 
         .card-image {
             img {
-                width: var(--card-img-width, 280px);
+                width: var(--card-img-width, 580px);
                 margin: 0 auto;
                 display: block;
             }
