@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_04_16_163425) do
 
-  create_table "fgroups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "fgroups", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_163425) do
     t.index ["model_id"], name: "index_fgroups_on_model_id"
   end
 
-  create_table "forders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "forders", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "meal", limit: 50, null: false
     t.string "resturant", limit: 50, null: false
     t.string "image", limit: 50
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_163425) do
     t.index ["model_id"], name: "index_forders_on_model_id"
   end
 
-  create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.boolean "action", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_163425) do
     t.index ["request_id"], name: "index_friends_on_request_id"
   end
 
-  create_table "groupusers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "groupusers", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "model_id", null: false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_163425) do
     t.index ["model_id"], name: "index_groupusers_on_model_id"
   end
 
-  create_table "invitations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "invitations", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "owner_id"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_163425) do
     t.index ["owner_id"], name: "index_invitations_on_owner_id"
   end
 
-  create_table "models", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "models", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.boolean "admin", default: false
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_163425) do
     t.index ["username"], name: "index_models_on_username"
   end
 
-  create_table "notifcations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "notifcations", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "link"
     t.string "title", limit: 50, default: "", null: false
     t.string "color", default: "blue"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_163425) do
     t.index ["model_id"], name: "index_notifcations_on_model_id"
   end
 
-  create_table "orderusers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "orderusers", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "model_id", null: false
