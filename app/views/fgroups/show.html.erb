@@ -1,12 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<p class="boy">
+  <strong>Group Name : </strong>
   <%= @fgroup.name %>
 </p>
+<p class="boy">
+<%= link_to 'Back', fgroups_path %> |
+<%= link_to 'Edit', edit_fgroup_path(@fgroup) %> 
+</p>
 
-<%= link_to 'Edit', edit_fgroup_path(@fgroup) %> |
-<%= link_to 'Back', fgroups_path %>
-<%= render 'invite', fgroup: @fgroup ,friends: @friends , friendsActivity: @friendsActivity%>
+<%= render 'invite', fgroup: @fgroup ,friends: @friends , friendsActivity: @friendsActivity , friendInvite: @friendInvite%>
 
 
+<style>
+  .boy{
+    text-align: center;
+    font-size: 25px;
+    color: #F3BF61 ;
+  }
+</style>

@@ -16,39 +16,32 @@ class FgroupsController < ApplicationController
     @friends = Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action }
     @fgroups = Fgroup.all
     lefaBoooy = Groupuser.all
-    p "booooooooooooooooooooooooofmjosngjkfngjnjnf"
-    p lefaBoooy
-    p "booooooooooooooooooooooooofmjosngjkfngjnjnf"
     
     hisfriends = Friend.all.select{ |friend| friend.reciver_id ==current_model.id or friend.request_id ==  current_model.id and friend.action }
-    # @friendsActivity = [] 
-    
-    # if lefaBoooy.length() > 0      
-    #   lefaBoooy.each do |model|
-    #     @friendsActivity += hisfriends.select{ |boy| model.model_id != boy.reciver_id and model.model_id != boy.request_id and model.model_id != current_model.id  }
-      
-    #   end
-    # else
-    #   # @friendsActivity = hisfriends
-    # end
     @friendsActivity = [] 
     flag = []
+    @friendInvite = []
     if lefaBoooy.length() > 0      
       hisfriends.each do |model|
         flag = []
         flag = lefaBoooy.select{ |boy| boy.model_id == model.reciver_id or boy.model_id == model.request_id }
         if flag.length() == 0 
           @friendsActivity.push model
+        else
+          @friendInvite.push model
         end
       end
     else
       @friendsActivity = hisfriends
-    end
 
+    end
     @friendsActivity = @friendsActivity.uniq
-    p "kfdmgkldfmglkdfmgkldf,mgkldfmgdfkl,gmdflk,g"
-    p @friendsActivity
-    p "kfdmgkldfmglkdfmgkldf,mgkldfmgdfkl,gmdflk,g"
+    @friendInvite = @friendInvite.uniq
+
+    puts "heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeey"
+     
+    puts "heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeey"
+
     
   end
 
