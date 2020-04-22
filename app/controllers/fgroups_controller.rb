@@ -37,11 +37,6 @@ class FgroupsController < ApplicationController
     end
     @friendsActivity = @friendsActivity.uniq
     @friendInvite = @friendInvite.uniq
-
-    puts "heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeey"
-     
-    puts "heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeey"
-
     
   end
 
@@ -54,10 +49,7 @@ class FgroupsController < ApplicationController
   end
 
   def add 
-
-    print "===================================================="
     puts params
-    print "Booooooooooooooooooooooooooooooooooooooooooooooooooooooooooy"
     f = Groupuser.create(model_id:params["id"] , fgroup_id:params["group_id"])
     # f= Groupuser.new
 
