@@ -22,6 +22,7 @@ class FriendsController < ApplicationController
     friend.request_id=current_model.id
     friend.reciver_id=params[:id]
     body=current_model.username+" has  sent you a freind request "
+    puts "notification pre send"
     Notifcation.savenotify(params[:id].to_i,body,"http://localhost:3000/friends","new friend reqeust","red","mdi mdi-bell")
     
     friend.save
