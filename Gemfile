@@ -71,7 +71,7 @@ group :test do
   #Guard::LiveReload automatically reloads your browser when 'view' files are modified.
   gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
   #make erroes better
-  gem 'better_errors', '~> 2.4'
+  gem 'better_errors', '~> 2.9'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
